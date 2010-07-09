@@ -1,11 +1,8 @@
-= Cuke-max
-
-Cuke-max is a thin wrapper for Cucumber (http://github.com/aslakhellesoy/cucumber/tree/master) which runs the tests that are most likely to fail.
+= CukePatch
 
 == Docs
 
-https://github.com/josephwilk/cukepatch/wikis
-
+https://github.com/josephwilk/cukepatch-client/wikis
 
 == Running tests
 
