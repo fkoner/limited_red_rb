@@ -1,0 +1,51 @@
+--- 
+dependencies: 
+  httparty: 
+    group: 
+    - :default
+    version: = 0.5.2
+  rspec: 
+    group: 
+    - :default
+    version: = 2.0.0.beta.15
+  json: 
+    group: 
+    - :default
+    version: = 1.4.3
+  cucumber: 
+    group: 
+    - :default
+    version: = 0.8.3
+specs: 
+- builder: 
+    version: 2.1.2
+- crack: 
+    version: 0.1.6
+- diff-lcs: 
+    version: 1.1.2
+- trollop: 
+    version: 1.16.2
+- gherkin: 
+    version: 2.0.2
+- json_pure: 
+    version: 1.4.3
+- term-ansicolor: 
+    version: 1.0.5
+- cucumber: 
+    version: 0.8.3
+- httparty: 
+    version: 0.5.2
+- json: 
+    version: 1.4.3
+- rspec-core: 
+    version: 2.0.0.beta.15
+- rspec-expectations: 
+    version: 2.0.0.beta.15
+- rspec-mocks: 
+    version: 2.0.0.beta.15
+- rspec: 
+    version: 2.0.0.beta.15
+hash: dab9099b323d8363788489ee2ca71031e073c023
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

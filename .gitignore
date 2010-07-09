@@ -1,0 +1,5 @@
+log/*
+dump.rdb
+.DS_Store
+pkg/*
+.bundle
