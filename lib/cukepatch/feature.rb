@@ -12,20 +12,20 @@ module CukePatch
       end
 
       def log_fail(build_id, failure)
-        post("/project/#{@project_id}/build/#{build_id}/fail", :query => {:test => failure.file_colon_line})
+        post("/projects/#{@project_id}/builds/#{build_id}/fail", :query => {:test => failure.file_colon_line})
       end
 
       def log_pass(build_id, pass)
-        post("/project/#{@project_id}/build/#{build_id}/pass", :query => {:test => pass.file_colon_line})
+        post("/projects/#{@project_id}/builds/#{build_id}/pass", :query => {:test => pass.file_colon_line})
       end
 
       def log_feature_data(build_id, json)
-        post("/project/#{@project_id}/build/#{build_id}/data", {:features => json})
+        post("/projects/#{@project_id}/builds/#{build_id}/data", {:features => json})
       end
 
       def find_failing_features
         raise "No project_id was found in params: #{params.inspect}" if @project_id.nil?
-        response = get("/project/#{@project_id}/features/fail")
+        response = get("/projects/#{@project_id}/features/fail")
         return [] if response.nil? || response.empty?
         response.code == 200 ? response.body.split(" ") : []
       end
