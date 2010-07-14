@@ -37,11 +37,11 @@ Feature: Recording step definitions
       end
     """
     And I have run "cukepatch features"
-    When I go to http://localhost:9292/projects/cuke_internal_tests/step_definitions
+    When I go to http://localhost:9292/projects/cuke_internal_tests/step_regexps
     Then I should see JSON:
     """
     {
-      "step_definitions":[
+      "step_regexps":[
         /^boozey$/,
         /^beggar$/,
         /^table$/,
