@@ -62,7 +62,7 @@ module CukePatch
 
     def extend_for_cukepatch(prioritised_features)
       formatter_options = ["--format", CUKE_MAX_FORMATTER,
-                           "--out", "tmp"]
+                           "--out", ".cukepatch.tmp"]
 
       formatter_options += ["--format", "pretty"] unless default_formatter_overriden?
 

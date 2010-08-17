@@ -7,6 +7,7 @@ module CukePatch
         config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first))
         host = config['host'] || 'localhost'
         port = config['port'] || 9292
+
         @project_id = config['id']
         base_uri "#{host}:#{port}"
       end
@@ -20,7 +21,7 @@ module CukePatch
       end
 
       def log_feature_data(build_id, json)
-        post("/projects/#{@project_id}/builds/#{build_id}/data", {:features => json})
+        post("/projects/#{@project_id}/builds/#{build_id}/data", :body => {'features' => json})
       end
 
       def find_failing_features
