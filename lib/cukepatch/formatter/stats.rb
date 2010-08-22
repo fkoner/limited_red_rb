@@ -18,23 +18,21 @@ module CukePatch
       end
 
       def print_summary(feature_json)
-        failures.each do |failed_feature|
-          CukePatch::Feature.log_fail(@build_id, failed_feature)
-        end
-        passing.each do |passing_feature|
-          CukePatch::Feature.log_pass(@build_id, passing_feature)
-        end
-        CukePatch::Feature.log_feature_data(@build_id, feature_json)
+        CukePatch::Feature.log_results(@build_id, {:fails => failing_files, 
+                                                   :passes => passing_files,
+                                                   :features   => feature_json} )
       end
 
-      def failures
+      def failing_files
         failures = @step_mother.scenarios(:failed).select { |s| s.is_a?(Cucumber::Ast::Scenario) || s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow) }
-        failures.collect { |s| (s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow)) ? s.scenario_outline : s }
+        failures = failures.collect { |s| (s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow)) ? s.scenario_outline : s }
+        failures.map{|fail| fail.file_colon_line}
       end
 
-      def passing
+      def passing_files
         passing = @step_mother.scenarios(:passed).select { |s| s.is_a?(Cucumber::Ast::Scenario) || s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow) }
-        passing.collect { |s| (s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow)) ? s.scenario_outline : s }
+        passing = passing.collect { |s| (s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow)) ? s.scenario_outline : s }
+        passing.map{|pass| pass.file_colon_line}
       end
     end
   end
