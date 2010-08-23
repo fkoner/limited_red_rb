@@ -21,13 +21,22 @@ module CukePatch
 
       def ensure_config_exists
         unless cukepatch_yml_defined?
-          print 'Project name:'
-          input = STDIN.readline
-
+          project_name = ask_for_project_name
           File.open('cukepatch.yml', 'w') do |f|
-            f.write("id: #{input}")
+            f.write("id: #{project_name}")
           end
         end
+      end
+
+      def ask_for_project_name
+        print "Project name"
+        project_name = guess_project_name
+        print " (default: #{project_name})" if project_name
+        print ": "
+        input = STDIN.readline.strip
+        input = input.empty? ? project_name : input
+        input.downcase
+        input.gsub(/[^a-zA-Z0-9']+/, "-")
       end
 
       def valid_config?(config)
@@ -44,6 +53,15 @@ module CukePatch
 
       def cukepatch_file
         @cukepatch_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
+      end
+      
+      private
+      def guess_project_name
+        dir = Dir.pwd
+        if dir
+          current_dir = dir.split('/')[-1]
+          return current_dir unless current_dir.empty?
+        end
       end
     end
 
