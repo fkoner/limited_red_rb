@@ -15,8 +15,9 @@ module CukePatch
       end
 
       def log_results(build_id, data)
-        post("/projects/#{@project_id}/builds", :body => data.merge({:user => @username,
-                                                                     :token => @api_key}))
+        result = post("/projects/#{@project_id}/builds", :body => data.merge({:user => @username,
+                                                                              :token => @api_key}))
+        puts error_message(result) if error?(result)
       end
 
       def find_failing_features
@@ -25,6 +26,15 @@ module CukePatch
 
         return [] if response.nil? || response.empty?
         response.code == 200 ? response.body.split(" ") : []
+      end
+      
+      private
+      def error?(result)
+        result && !result.body.empty?
+      end
+      
+      def error_message(error_msg)
+        "\nCukeMax had a problem logging your test results.\n  #{error_msg}\n\n"
       end
 
     end
