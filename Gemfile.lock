@@ -1,51 +1,41 @@
---- 
-dependencies: 
-  httparty: 
-    group: 
-    - :default
-    version: = 0.5.2
-  rspec: 
-    group: 
-    - :default
-    version: = 2.0.0.beta.15
-  json: 
-    group: 
-    - :default
-    version: = 1.4.3
-  cucumber: 
-    group: 
-    - :default
-    version: = 0.8.3
-specs: 
-- builder: 
-    version: 2.1.2
-- crack: 
-    version: 0.1.6
-- diff-lcs: 
-    version: 1.1.2
-- trollop: 
-    version: 1.16.2
-- gherkin: 
-    version: 2.0.2
-- json_pure: 
-    version: 1.4.3
-- term-ansicolor: 
-    version: 1.0.5
-- cucumber: 
-    version: 0.8.3
-- httparty: 
-    version: 0.5.2
-- json: 
-    version: 1.4.3
-- rspec-core: 
-    version: 2.0.0.beta.15
-- rspec-expectations: 
-    version: 2.0.0.beta.15
-- rspec-mocks: 
-    version: 2.0.0.beta.15
-- rspec: 
-    version: 2.0.0.beta.15
-hash: dab9099b323d8363788489ee2ca71031e073c023
-sources: 
-- Rubygems: 
-    uri: http://gemcutter.org
+GEM
+  remote: http://gemcutter.org/
+  specs:
+    bson (1.0.4)
+    builder (2.1.2)
+    crack (0.1.6)
+    cucumber (0.8.5)
+      builder (~> 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.1.4)
+      json_pure (~> 1.4.3)
+      term-ansicolor (~> 1.0.4)
+    diff-lcs (1.1.2)
+    gherkin (2.1.4)
+      trollop (~> 1.16.2)
+    httparty (0.5.2)
+      crack (= 0.1.6)
+    json (1.4.3)
+    json_pure (1.4.6)
+    mongo (1.0.7)
+      bson (>= 1.0.4)
+    rspec (2.0.0.beta.15)
+      rspec-core (= 2.0.0.beta.15)
+      rspec-expectations (= 2.0.0.beta.15)
+      rspec-mocks (= 2.0.0.beta.15)
+    rspec-core (2.0.0.beta.15)
+    rspec-expectations (2.0.0.beta.15)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.0.beta.15)
+    term-ansicolor (1.0.5)
+    trollop (1.16.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cucumber (= 0.8.5)
+  httparty (= 0.5.2)
+  json (= 1.4.3)
+  mongo (= 1.0.7)
+  rspec (= 2.0.0.beta.15)
