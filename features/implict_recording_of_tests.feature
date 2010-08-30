@@ -6,9 +6,11 @@ Feature: Implicit recording of test results
     Given a standard Cucumber project directory structure
     And a file named "cukepatch.yml" with:
       """
+        project name:   cuke_internal_tests
+        username: josephwilk
+        api key: 123
         host: localhost
         port: 9292
-        id:   cuke_internal_tests
       """
 
   @wip

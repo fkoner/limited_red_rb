@@ -9,7 +9,9 @@ Feature: Run features prioritising the most likely to fail
     """
       host: localhost
       port: 9292
-      id:   cuke_internal_tests
+      project name: cuke_internal_tests
+      username: josephwilk
+      api key: 123
     """
 
   Scenario: Frequent failing feature

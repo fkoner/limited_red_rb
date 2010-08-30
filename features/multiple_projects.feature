@@ -6,12 +6,20 @@ Feature: Multiple projects
     Given a Cucumber project "build_1" has a failing feature called "antifickle.feature"
     And a file named "build_1/cukepatch.yml" with:
     """
-      id: build_1
+      project name:   build_1
+      username: josephwilk
+      api key: 123
+      host: localhost
+      port: 9292
     """
     And a Cucumber project "build_2" has a failing feature called "fickle.feature"
     And a file named "build_2/cukepatch.yml" with:
     """
-      id: build_2
+      project name:   build_2
+      username: josephwilk
+      api key: 123
+      host: localhost
+      port: 9292
     """
     And I have run "cukepatch features" 1 time in "build_1"
     And I have run "cukepatch features" 1 time in "build_2"
