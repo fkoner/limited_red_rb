@@ -5,7 +5,8 @@ module CukePatch
 
     class << self
       def run(args)
-        cukepatch(args).run
+        runner = cukepatch(args)
+        runner.run if runner
       end
       
       def cukepatch(args)
@@ -13,7 +14,11 @@ module CukePatch
         if valid_config?(config)
           new(args, config)
         else
-          puts "Please set the id in your cukepatch.yml."
+          errors = "Make sure you have the following set in your cukepatch.yml:\n"
+          errors += " * project name\n" unless config['project name']
+          errors += " * username\n" unless config['username']
+          errors += " * api key\n" unless config['api key']
+          print errors
         end
       end
 
@@ -21,26 +26,39 @@ module CukePatch
 
       def ensure_config_exists
         unless cukepatch_yml_defined?
-          project_name = ask_for_project_name
+          details = ask_for_setup_details
           File.open('cukepatch.yml', 'w') do |f|
-            f.write("id: #{project_name}")
+            f.write("project name: #{details['project name']}\n")
+            f.write("username: #{details['username']}\n")
+            f.write("api key: #{details['api key']}\n")
           end
         end
       end
 
-      def ask_for_project_name
+      def ask_for_setup_details
+        details = {}
         print "Project name"
         project_name = guess_project_name
         print " (default: #{project_name})" if project_name
         print ": "
-        input = STDIN.readline.strip
-        input = input.empty? ? project_name : input
-        input.downcase
-        input.gsub(/[^a-zA-Z0-9']+/, "-")
+        name = STDIN.readline.strip
+        name = name.empty? ? project_name : name
+        name.downcase
+        details['project name'] = name.gsub(/[^a-zA-Z0-9']+/, "-")
+        print "username: "
+        username = STDIN.readline.strip
+        details['username'] = username
+        print "api key: "
+        api_key = STDIN.readline.strip
+        details['api key'] = api_key
+        details
       end
 
       def valid_config?(config)
-        config && config['id']
+        config && 
+        config['project name'] &&
+        config['username'] &&
+        config['api key']
       end
 
       def cukepatch_yml_defined?
