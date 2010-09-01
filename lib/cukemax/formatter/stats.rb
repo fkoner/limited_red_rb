@@ -19,8 +19,8 @@ module CukeMax
 
       def print_summary(feature_json)
         CukeMax::Feature.log_results(@build_id, {:fails => failing_files, 
-                                                   :passes => passing_files,
-                                                   :features   => feature_json} )
+                                                 :passes => passing_files,
+                                                 :features   => feature_json} )
       end
 
       def failing_files

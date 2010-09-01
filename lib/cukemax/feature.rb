@@ -16,7 +16,8 @@ module CukeMax
 
       def log_results(build_id, data)
         result = post("/projects/#{@project_id}/builds", :body => data.merge({:user => @username,
-                                                                              :token => @api_key}))
+                                                                              :token => token_for(data)}))
+
         puts error_message(result) if error?(result)
       end
 
@@ -29,6 +30,17 @@ module CukeMax
       end
       
       private
+      def token_for(data)
+        data_string = @username +
+                      @project_id.to_s +
+                      data[:fails].join("") +
+                      data[:passes].join("") +
+                      data[:features] +
+                      @api_key
+
+        Digest::SHA1.hexdigest(data_string)
+      end
+
       def error?(result)
         result && !result.body.empty?
       end
