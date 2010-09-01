@@ -1,13 +1,13 @@
 require 'cucumber/rake/task'
-require File.dirname(__FILE__) + '/../../cukepatch'
+require File.dirname(__FILE__) + '/../../cukemax'
 
-module CukePatch
+module CukeMax
   module Rake
     class Task < Cucumber::Rake::Task
-      def initialize(task_name = "cukepatch", desc = "Run Cucumber features ordered by likelihood of failure")
+      def initialize(task_name = "cukemax", desc = "Run Cucumber features ordered by likelihood of failure")
         super
-        cukepatch = CukePatch::Cli.cukepatch(self.cucumber_opts)
-        self.cucumber_opts = cukepatch.extended_args
+        cukemax = CukeMax::Cli.cukemax(self.cucumber_opts)
+        self.cucumber_opts = cukemax.extended_args
       end
     end
   end

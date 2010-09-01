@@ -1,4 +1,4 @@
-module CukePatch
+module CukeMax
   class Stats
     def initialize(args, config)
       @args = args
@@ -11,7 +11,7 @@ module CukePatch
     end
 
     def failing_features
-      CukePatch::Feature.find_failing_features
+      CukeMax::Feature.find_failing_features
     end
  
     def arguments

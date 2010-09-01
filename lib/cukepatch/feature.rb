@@ -1,10 +1,10 @@
-module CukePatch
+module CukeMax
   class Feature
     include HTTParty
 
     class << self
       def load_config(config = nil)
-        @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first))
+        @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukemax{.yml,.yaml}').first))
         host = @config['host'] || 'www.cukemax.com'
         port = @config['port'] || 80
 

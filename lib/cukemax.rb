@@ -5,10 +5,10 @@ gem 'httparty', '=0.5.2'
 require 'httparty'
 require 'cucumber'
 
-require 'cukepatch/feature'
-require 'cukepatch/stats'
-require 'cukepatch/cli'
-require 'cukepatch/formatter/stats'
+require 'cukemax/feature'
+require 'cukemax/stats'
+require 'cukemax/cli'
+require 'cukemax/formatter/stats'
 
-module CukePatch
+module CukeMax
 end

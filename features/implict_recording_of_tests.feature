@@ -4,7 +4,7 @@ Feature: Implicit recording of test results
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukepatch.yml" with:
+    And a file named "cukemax.yml" with:
       """
         project name:   cuke_internal_tests
         username: josephwilk
@@ -20,8 +20,8 @@ Feature: Implicit recording of test results
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch'
+      require 'cukemax'
     """
     And I run cucumber features
-    When I run "cukepatch features"
+    When I run "cukemax features"
     Then "features/fickle.feature" should be run first

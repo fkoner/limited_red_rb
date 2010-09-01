@@ -1,11 +1,11 @@
 Feature: Rake task
   In order to ease the development process
   As a developer and CI server administrator
-  CukePatch should be executable via Rake
+  CukeMax should be executable via Rake
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukepatch.yml" with:
+    And a file named "cukemax.yml" with:
       """
         host: localhost
         port: 9292
@@ -20,17 +20,17 @@ Feature: Rake task
     And a file named "Rakefile" with:
       """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch/rake/task'
+      require 'cukemax/rake/task'
 
-      CukePatch::Rake::Task.new do |t|
+      CukeMax::Rake::Task.new do |t|
         t.cucumber_opts = "features"
       end
       """
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch'
+      require 'cukemax'
     """
-    And I have run rake cukepatch
-    When I run rake cukepatch
+    And I have run rake cukemax
+    When I run rake cukemax
     Then "features/fickle.feature" should be run first

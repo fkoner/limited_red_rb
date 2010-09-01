@@ -1,6 +1,6 @@
 CUKE_MAX_DIR = '../cuke-max/bin'
 
-desc "startup cukepatch server for recording stats"
+desc "startup cukemax server for recording stats"
 task :boot => [:kill_rack] do
   sh "#{CUKE_MAX_DIR}/cuke-max"
   sleep(2)

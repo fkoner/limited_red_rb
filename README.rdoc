@@ -1,8 +1,8 @@
-= CukePatch
+= CukeMax
 
 == Docs
 
-https://github.com/josephwilk/cukepatch-client/wikis
+https://github.com/josephwilk/cukemax-client/wikis
 
 == Running tests
 

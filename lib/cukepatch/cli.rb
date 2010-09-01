@@ -1,20 +1,20 @@
-module CukePatch
+module CukeMax
   class Cli
     LANGUAGE = 'rb'
-    CUKE_MAX_FORMATTER = "CukePatch::Formatter::Stats"
+    CUKE_MAX_FORMATTER = "CukeMax::Formatter::Stats"
 
     class << self
       def run(args)
-        runner = cukepatch(args)
+        runner = cukemax(args)
         runner.run if runner
       end
       
-      def cukepatch(args)
+      def cukemax(args)
         ensure_config_exists
         if valid_config?(config)
           new(args, config)
         else
-          errors = "Make sure you have the following set in your cukepatch.yml:\n"
+          errors = "Make sure you have the following set in your cukemax.yml:\n"
           errors += " * project name\n" unless config['project name']
           errors += " * username\n" unless config['username']
           errors += " * api key\n" unless config['api key']
@@ -25,9 +25,9 @@ module CukePatch
       private
 
       def ensure_config_exists
-        unless cukepatch_yml_defined?
+        unless cukemax_yml_defined?
           details = ask_for_setup_details
-          File.open('cukepatch.yml', 'w') do |f|
+          File.open('cukemax.yml', 'w') do |f|
             f.write("project name: #{details['project name']}\n")
             f.write("username: #{details['username']}\n")
             f.write("api key: #{details['api key']}\n")
@@ -61,16 +61,16 @@ module CukePatch
         config['api key']
       end
 
-      def cukepatch_yml_defined?
-        cukepatch_file
+      def cukemax_yml_defined?
+        cukemax_file
       end
 
       def config
-        @config ||= YAML::load(IO.read(cukepatch_file))
+        @config ||= YAML::load(IO.read(cukemax_file))
       end
 
-      def cukepatch_file
-        @cukepatch_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
+      def cukemax_file
+        @cukemax_file ||= Dir.glob('{,.config/,config/}cukemax{.yml,.yaml}').first
       end
       
       private
@@ -93,12 +93,12 @@ module CukePatch
     end
 
     def extended_args
-      extend_for_cukepatch(prioritied_features)
+      extend_for_cukemax(prioritied_features)
     end
 
-    def extend_for_cukepatch(prioritised_features)
+    def extend_for_cukemax(prioritised_features)
       formatter_options = ["--format", CUKE_MAX_FORMATTER,
-                           "--out", ".cukepatch.tmp"]
+                           "--out", ".cukemax.tmp"]
 
       formatter_options += ["--format", "pretty"] unless default_formatter_overriden?
 
@@ -108,7 +108,7 @@ module CukePatch
     private
 
     def prioritied_features
-      cuke_stats = CukePatch::Stats.new(@args, @config)
+      cuke_stats = CukeMax::Stats.new(@args, @config)
       cuke_stats.feature_files
     end
 

@@ -1,3 +1,3 @@
-require File.dirname(__FILE__) + '/../lib/cukepatch'
+require File.dirname(__FILE__) + '/../lib/cukemax'
 
 require 'rspec'

@@ -1,11 +1,11 @@
 Feature: Recording step definitions
   In order have autocompletion support in external tools
-  As a cukepatch user
+  As a cukemax user
   I want step regular expression to be uploaded to cuke-max
 
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukepatch.yml" with:
+    And a file named "cukemax.yml" with:
     """
       project name: cuke_internal_tests
       username: josephwilk
@@ -38,7 +38,7 @@ Feature: Recording step definitions
       Given /^step which is not in the feature$/ do
       end
     """
-    And I have run "cukepatch features"
+    And I have run "cukemax features"
     When I go to http://localhost:9292/projects/cuke_internal_tests/step_regexps
     Then I should see JSON:
     """
