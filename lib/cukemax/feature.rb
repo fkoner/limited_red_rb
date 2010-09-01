@@ -23,7 +23,7 @@ module CukeMax
 
       def find_failing_features
         raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
-        response = get("/projects/#{@project_id}/features/fails")
+        response = get("/projects/#{@project_id}/features/fails?user=#{@username}")
 
         return [] if response.nil? || response.empty?
         response.code == 200 ? response.body.split(" ") : []
