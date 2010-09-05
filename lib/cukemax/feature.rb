@@ -5,13 +5,13 @@ module CukeMax
     class << self
       def load_config(config = nil)
         @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukemax{.yml,.yaml}').first))
-        host = @config['host'] || 'https://cukemax.heroku.com'
-        port = @config['port'] || 80
+        host = @config['host'] || 'https://limited-red.heroku.com'
+        port = @config['port'] || ''
 
         @project_id = @config['project name']
         @username = @config['username']
         @api_key = @config['api key']
-        base_uri "https://cukemax.heroku.com"
+        base_uri "#{host}#{port == '' ? '' : ":#{port}"}"
       end
 
       def log_results(build_id, data)
