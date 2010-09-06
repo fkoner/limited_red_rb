@@ -23,5 +23,5 @@ Feature: Implicit recording of test results
       require 'cukemax'
     """
     And I run cucumber features
-    When I run "cukemax features"
+    When I run "cucumber features"
     Then "features/fickle.feature" should be run first

@@ -38,7 +38,7 @@ Feature: Recording step definitions
       Given /^step which is not in the feature$/ do
       end
     """
-    And I have run "cukemax features"
+    And I have run "cucumber features"
     When I go to http://localhost:9292/projects/cuke_internal_tests/step_regexps
     Then I should see JSON:
     """

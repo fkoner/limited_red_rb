@@ -4,15 +4,10 @@ module CukeMax
     CUKE_MAX_FORMATTER = "CukeMax::Formatter::Stats"
 
     class << self
-      def run(args)
-        runner = cukemax(args)
-        runner.run if runner
-      end
-      
-      def cukemax(args)
+      def load_and_validate_config
         ensure_config_exists
         if valid_config?(config)
-          new(args, config)
+          config
         else
           errors = "Make sure you have the following set in your cukemax.yml:\n"
           errors += " * project name\n" unless config['project name']
@@ -83,9 +78,8 @@ module CukeMax
       end
     end
 
-    def initialize(args, config)
-      @args = args || []
-      @config = config
+    def initialize
+      @config = Stats.load_and_validate_config
     end
 
     def run
@@ -106,17 +100,6 @@ module CukeMax
     end
         
     private
-
-    def prioritied_features
-      cuke_stats = CukeMax::Stats.new(@args, @config)
-      cuke_stats.feature_files
-    end
-
-    def run_cucumber_with(args)
-      step_mother = ::Cucumber::StepMother.new
-      step_mother.load_programming_language(LANGUAGE)
-      ::Cucumber::Cli::Main.new(args).execute!(step_mother)
-    end
 
     def default_formatter_overriden?
       @args.include?("--format") || @args.include?("-f")

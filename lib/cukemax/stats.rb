@@ -1,7 +1,6 @@
 module CukeMax
   class Stats
-    def initialize(args, config)
-      @args = args
+    def initialize(config)
       Feature.load_config(config)
     end
 
@@ -12,10 +11,6 @@ module CukeMax
 
     def failing_features
       CukeMax::Feature.find_failing_features
-    end
- 
-    def arguments
-      @args.join(" ")
-    end
+    end 
   end
 end

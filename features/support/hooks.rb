@@ -8,7 +8,7 @@ def setup_fixtures(connection)
 end
 
 Before do
-  m = Mongo::Connection.new('localhost',Mongo::Connection::DEFAULT_PORT)
+  m = Mongo::Connection.new('localhost', Mongo::Connection::DEFAULT_PORT)
   m.drop_database('cuke_max')
   setup_fixtures(m)
 end

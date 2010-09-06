@@ -10,8 +10,8 @@ Feature: Rake task
         host: localhost
         port: 9292
         project name: cuke_internal_tests
-        username: josephwilk
-        api key: 123
+        username: poobear
+        api key: 88dd7a152bf342b6b64bcc54813ec735
       """
 
   Scenario: One failing scenario
@@ -19,18 +19,17 @@ Feature: Rake task
     And a feature named "features/awesome.feature" which always passes
     And a file named "Rakefile" with:
       """
-      $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukemax/rake/task'
-
-      CukeMax::Rake::Task.new do |t|
+      require 'cucumber/rake/task'
+      Cucumber::Rake::Task.new do |t|
         t.cucumber_opts = "features"
       end
       """
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukemax'
+      require 'cukemax/plugin'
     """
-    And I have run rake cukemax
-    When I run rake cukemax
+    And I have run rake cucumber
+    When I run rake cucumber
+    Then STDERR should be empty
     Then "features/fickle.feature" should be run first

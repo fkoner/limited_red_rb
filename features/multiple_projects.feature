@@ -21,9 +21,9 @@ Feature: Multiple projects
       host: localhost
       port: 9292
     """
-    And I have run "cukemax features" 1 time in "build_1"
-    And I have run "cukemax features" 1 time in "build_2"
-    When I run "cukemax features" in "build_2"
+    And I have run "cucumber features" 1 time in "build_1"
+    And I have run "cucumber features" 1 time in "build_2"
+    When I run "cucumber features" in "build_2"
     Then "features/fickle.feature" should be run first
     
     

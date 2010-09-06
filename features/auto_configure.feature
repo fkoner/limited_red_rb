@@ -5,5 +5,5 @@ Feature: Auto Configure
   @interactive
   Scenario: no config
     Given a Cucumber project "build" has a failing feature called "fickle.feature"
-    When I run "cukemax features" in "build"
+    When I run "cucumber features" in "build"
     Then "features/fickle.feature" should be run first

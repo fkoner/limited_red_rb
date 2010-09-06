@@ -1,6 +1,6 @@
-CUKE_MAX_EXECUTABLE = '../../../bin/cukemax'
+CUKE_MAX_EXECUTABLE = 'cucumber'
 
-Given /^I have run "cukemax ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$/ do |cucumber_opts, count, build|
+Given /^I have run "cucumber ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$/ do |cucumber_opts, count, build|
   count ||= 1
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
@@ -27,7 +27,7 @@ EOF
   And %Q{a file named "#{dir}/features/step_definitions/steps.rb" with:}, steps 
 end
 
-When /^I run "cukemax ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
+When /^I run "cucumber ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
     run "#{(build ? "../" : "") + CUKE_MAX_EXECUTABLE} #{cucumber_opts}"
