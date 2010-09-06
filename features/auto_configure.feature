@@ -5,5 +5,10 @@ Feature: Auto Configure
   @interactive
   Scenario: no config
     Given a Cucumber project "build" has a failing feature called "fickle.feature"
+    And a file named "features/support/env.rb" with:
+    """
+      $LOAD_PATH.unshift(CUCUMBER_LIB)
+      require 'cukemax/plugin'
+    """
     When I run "cucumber features" in "build"
     Then "features/fickle.feature" should be run first

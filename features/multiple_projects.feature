@@ -12,6 +12,11 @@ Feature: Multiple projects
       host: localhost
       port: 9292
     """
+    And a file named "build_1/features/support/env.rb" with:
+    """
+      $LOAD_PATH.unshift(CUCUMBER_LIB)
+      require 'cukemax/plugin'
+    """
     And a Cucumber project "build_2" has a failing feature called "fickle.feature"
     And a file named "build_2/cukemax.yml" with:
     """
@@ -21,6 +26,11 @@ Feature: Multiple projects
       host: localhost
       port: 9292
     """
+    And a file named "build_2/features/support/env.rb" with:
+    """
+      $LOAD_PATH.unshift(CUCUMBER_LIB)
+      require 'cukemax/plugin'
+    """ 
     And I have run "cucumber features" 1 time in "build_1"
     And I have run "cucumber features" 1 time in "build_2"
     When I run "cucumber features" in "build_2"

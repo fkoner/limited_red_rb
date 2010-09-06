@@ -1,11 +1,11 @@
-CUKE_MAX_EXECUTABLE = 'cucumber'
+CUCUMBER_EXECUTABLE = 'cucumber'
 
 Given /^I have run "cucumber ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$/ do |cucumber_opts, count, build|
   count ||= 1
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
     count.to_i.times do
-      run "#{(build ? "../" : "") + CUKE_MAX_EXECUTABLE} -q #{cucumber_opts}"
+      run "#{CUCUMBER_EXECUTABLE} -q #{cucumber_opts}"
       Then "STDERR should be empty"
     end
   end
@@ -30,7 +30,7 @@ end
 When /^I run "cucumber ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
-    run "#{(build ? "../" : "") + CUKE_MAX_EXECUTABLE} #{cucumber_opts}"
+    run "#{CUCUMBER_EXECUTABLE} #{cucumber_opts}"
     Then "STDERR should be empty"
   end
 end

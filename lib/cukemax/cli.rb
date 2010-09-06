@@ -1,8 +1,5 @@
 module CukeMax
   class Cli
-    LANGUAGE = 'rb'
-    CUKE_MAX_FORMATTER = "CukeMax::Formatter::Stats"
-
     class << self
       def load_and_validate_config
         ensure_config_exists
@@ -77,33 +74,5 @@ module CukeMax
         end
       end
     end
-
-    def initialize
-      @config = Stats.load_and_validate_config
-    end
-
-    def run
-      run_cucumber_with(extended_args)
-    end
-
-    def extended_args
-      extend_for_cukemax(prioritied_features)
-    end
-
-    def extend_for_cukemax(prioritised_features)
-      formatter_options = ["--format", CUKE_MAX_FORMATTER,
-                           "--out", ".cukemax.tmp"]
-
-      formatter_options += ["--format", "pretty"] unless default_formatter_overriden?
-
-      prioritised_features + formatter_options + @args
-    end
-        
-    private
-
-    def default_formatter_overriden?
-      @args.include?("--format") || @args.include?("-f")
-    end
-
   end
 end

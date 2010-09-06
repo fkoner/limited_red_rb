@@ -10,8 +10,8 @@ Feature: Rake task
         host: localhost
         port: 9292
         project name: cuke_internal_tests
-        username: poobear
-        api key: 88dd7a152bf342b6b64bcc54813ec735
+        username: josephwilk
+        api key: 123
       """
 
   Scenario: One failing scenario
@@ -31,5 +31,4 @@ Feature: Rake task
     """
     And I have run rake cucumber
     When I run rake cucumber
-    Then STDERR should be empty
     Then "features/fickle.feature" should be run first

@@ -13,6 +13,12 @@ Feature: Recording step definitions
       host: localhost
       port: 9292
     """
+    And a file named "features/support/env.rb" with:
+    """
+      $LOAD_PATH.unshift(CUCUMBER_LIB)
+      require 'cukemax/plugin'
+    """
+    
 
   @wip
   Scenario: Single feature
