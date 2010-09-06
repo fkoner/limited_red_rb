@@ -33,12 +33,16 @@ module CukeMax
       def token_for(data)
         data_string = @username +
                       @project_id.to_s +
-                      data[:fails].join("") +
-                      data[:passes].join("") +
+                      build_data_string(data[:fails]) +
+                      build_data_string(data[:passes]) +
                       data[:features] +
-                      @api_key
+                      @api_key.to_s
 
         Digest::SHA1.hexdigest(data_string)
+      end
+
+      def build_data_string(data)
+        data == "" ? "" : data.join("")
       end
 
       def error?(result)
