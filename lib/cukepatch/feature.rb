@@ -1,10 +1,10 @@
-module CukeMax
+module CukePatch
   class Feature
     include HTTParty
 
     class << self
       def load_config(config = nil)
-        @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukemax{.yml,.yaml}').first))
+        @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first))
         host = @config['host'] || 'https://limited-red.heroku.com'
         port = @config['port'] || ''
 
@@ -50,7 +50,7 @@ module CukeMax
       end
       
       def error_message(error_msg)
-        "\nCukeMax had a problem logging your test results.\n  #{error_msg}\n\n"
+        "\nCukePatch had a problem logging your test results.\n  #{error_msg}\n\n"
       end
 
     end

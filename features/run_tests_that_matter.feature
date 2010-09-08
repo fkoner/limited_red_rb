@@ -5,7 +5,7 @@ Feature: Run features prioritising the most likely to fail
 
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukemax.yml" with:
+    And a file named "cukepatch.yml" with:
     """
       host: localhost
       port: 9292
@@ -16,7 +16,7 @@ Feature: Run features prioritising the most likely to fail
     And a file named "features/support/env.rb" with:
     """
     $LOAD_PATH.unshift(CUCUMBER_LIB)
-    require 'cukemax/plugin'
+    require 'cukepatch/plugin'
     """
 
   Scenario: Frequent failing feature

@@ -1,4 +1,4 @@
-module CukeMax
+module CukePatch
   class Cli
     class << self
       def load_and_validate_config
@@ -19,7 +19,7 @@ module CukeMax
       def ensure_config_exists
         unless cukemax_yml_defined?
           details = ask_for_setup_details
-          File.open('cukemax.yml', 'w') do |f|
+          File.open('cukepatch.yml', 'w') do |f|
             f.write("project name: #{details['project name']}\n")
             f.write("username: #{details['username']}\n")
             f.write("api key: #{details['api key']}\n")
@@ -62,7 +62,7 @@ module CukeMax
       end
 
       def cukemax_file
-        @cukemax_file ||= Dir.glob('{,.config/,config/}cukemax{.yml,.yaml}').first
+        @cukemax_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
       end
       
       private

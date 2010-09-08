@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module CukeMax
+module CukePatch
   describe Cli do  
     it "should add the prioritised features before any other features" do
       cli = Cli.new(['features/'], nil)

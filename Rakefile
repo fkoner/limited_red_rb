@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "cukemax"
+    gem.name = "cukepatch"
     gem.summary = %Q{Run tests priorited by those that are most likely to fail}
     gem.description = %Q{Run tests priorited by those that are most likely to fail}
     gem.email = "joe@josephwilk.net"

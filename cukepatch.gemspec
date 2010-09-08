@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{cukemax}
+  s.name = "cukepatch"
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wilk"]
-  s.date = %q{2010-09-06}
+  s.date = %q{2010-09-08}
   s.description = %q{Run tests priorited by those that are most likely to fail}
   s.email = %q{joe@josephwilk.net}
   s.extra_rdoc_files = [
@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION.yml",
      "cucumber.yml",
-     "cukemax.gemspec",
      "examples/self_test/.gitignore",
      "features/auto_configure.feature",
      "features/multiple_projects.feature",
@@ -38,14 +37,6 @@ Gem::Specification.new do |s|
      "features/step_definitions/feature_steps.rb",
      "features/support/env.rb",
      "features/support/hooks.rb",
-     "lib/cukemax.rb",
-     "lib/cukemax/cli.rb",
-     "lib/cukemax/feature.rb",
-     "lib/cukemax/formatter/stats.rb",
-     "lib/cukemax/plugin.rb",
-     "lib/cukemax/rake/task.rb",
-     "lib/cukemax/stats.rb",
-     "spec/cuke_max/cli_spec.rb",
      "spec/spec_helper.rb",
      "tasks/cucumber.rake",
      "tasks/rspec.rake",
@@ -58,7 +49,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Run tests priorited by those that are most likely to fail}
   s.test_files = [
-    "spec/cuke_max/cli_spec.rb",
+    "spec/cukepatch/cli_spec.rb",
      "spec/spec_helper.rb"
   ]
 

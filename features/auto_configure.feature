@@ -8,7 +8,7 @@ Feature: Auto Configure
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukemax/plugin'
+      require 'cukepatch/plugin'
     """
     When I run "cucumber features" in "build"
     Then "features/fickle.feature" should be run first

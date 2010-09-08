@@ -1,4 +1,4 @@
-module CukeMax
+module CukePatch
   class Stats
     def initialize(config)
       Feature.load_config(config)
@@ -10,7 +10,7 @@ module CukeMax
     end
 
     def failing_features
-      CukeMax::Feature.find_failing_features
+      CukePatch::Feature.find_failing_features
     end 
   end
 end

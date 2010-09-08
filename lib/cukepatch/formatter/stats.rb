@@ -1,7 +1,7 @@
 require 'cucumber/formatter/json'
-require 'cukemax/feature'
+require 'cukepatch/feature'
 
-module CukeMax
+module CukePatch
   module Formatter  
     class Stats < Cucumber::Formatter::Json
       def initialize(step_mother, path_or_io, options)
@@ -18,7 +18,7 @@ module CukeMax
       end
 
       def print_summary(feature_json)
-        CukeMax::Feature.log_results(@build_id, {:fails => failing_files, 
+        CukePatch::Feature.log_results(@build_id, {:fails => failing_files, 
                                                  :passes => passing_files,
                                                  :features   => feature_json} )
       end

@@ -5,7 +5,7 @@ Feature: Rake task
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukemax.yml" with:
+    And a file named "cukepatch.yml" with:
       """
         host: localhost
         port: 9292
@@ -27,7 +27,7 @@ Feature: Rake task
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukemax/plugin'
+      require 'cukepatch/plugin'
     """
     And I have run rake cucumber
     When I run rake cucumber

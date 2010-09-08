@@ -1,11 +1,11 @@
 Feature: Recording step definitions
   In order have autocompletion support in external tools
-  As a cukemax user
-  I want step regular expression to be uploaded to cuke-max
+  As a cukepatch user
+  I want step regular expression to be uploaded to limited red
 
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukemax.yml" with:
+    And a file named "cukepatch.yml" with:
     """
       project name: cuke_internal_tests
       username: josephwilk
@@ -16,7 +16,7 @@ Feature: Recording step definitions
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukemax/plugin'
+      require 'cukepatch/plugin'
     """
     
 
