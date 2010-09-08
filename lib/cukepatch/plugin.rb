@@ -10,7 +10,7 @@ AfterConfiguration do |config|
     feature_files = ["features"] if feature_files.empty? 
     config.options[:paths] = cuke_stats.feature_files + feature_files
   else
-    put "Aborting Cucumber run"
+    puts "Aborting Cucumber run"
     exit
   end
 end
