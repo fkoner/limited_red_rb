@@ -7,7 +7,7 @@ require 'cucumber'
 
 require 'cukepatch/feature'
 require 'cukepatch/stats'
-require 'cukepatch/cli'
+require 'cukepatch/config'
 require 'cukepatch/formatter/stats'
 
 module CukePatch

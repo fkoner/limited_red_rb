@@ -1,12 +1,12 @@
 module CukePatch
-  class Cli
+  class Config
     class << self
       def load_and_validate_config
         ensure_config_exists
-        if valid_config?(config)
+        if valid_config?
           config
         else
-          errors = "Make sure you have the following set in your cukemax.yml:\n"
+          errors = "Make sure you have the following set in your cukepatch.yml:\n"
           errors += " * project name\n" unless config['project name']
           errors += " * username\n" unless config['username']
           errors += " * api key\n" unless config['api key']
@@ -17,12 +17,16 @@ module CukePatch
       private
 
       def ensure_config_exists
-        unless cukemax_yml_defined?
+        unless cukepatch_yml_defined?
           details = ask_for_setup_details
-          File.open('cukepatch.yml', 'w') do |f|
-            f.write("project name: #{details['project name']}\n")
+          
+          File.open(home_dir + '/.limited-red', 'w') do |f|
             f.write("username: #{details['username']}\n")
             f.write("api key: #{details['api key']}\n")
+          end
+          
+          File.open('cukepatch.yml', 'w') do |f|
+            f.write("project name: #{details['project name']}\n")
           end
         end
       end
@@ -46,26 +50,38 @@ module CukePatch
         details
       end
 
-      def valid_config?(config)
+      def valid_config?
         config && 
         config['project name'] &&
         config['username'] &&
         config['api key']
       end
 
-      def cukemax_yml_defined?
-        cukemax_file
+      def cukepatch_yml_defined?
+        cukepatch_file
+      end
+
+      def limited_red_file
+        @limited_red_file ||= Dir.glob("#{home_dir}/.limited-red").first
       end
 
       def config
-        @config ||= YAML::load(IO.read(cukemax_file))
+        @config ||= begin     
+          cukepatch_config  = YAML::load(IO.read(cukepatch_file))
+          limited_red_config = YAML::load(IO.read(limited_red_file))
+          limited_red_config.merge(cukepatch_config)
+        end
       end
 
-      def cukemax_file
-        @cukemax_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
+      def cukepatch_file
+        @cukepatch_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
       end
       
       private
+      def home_dir
+        ENV['HOME'] || File.expand_path('~')
+      end
+      
       def guess_project_name
         dir = Dir.pwd
         if dir

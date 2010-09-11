@@ -1,6 +1,6 @@
 Feature: Multiple projects
   In order to have multiple intelligent builds
-  I want cukemax to work across multiple projects
+  I want cukepatch to work across multiple projects
 
   Scenario: two different cucumber projects
     Given a Cucumber project "build_1" has a failing feature called "antifickle.feature"

@@ -1,6 +1,6 @@
 Feature: Auto Configure
   In order to save precious seconds of my life
-  I want cukemax to just work out the box without config
+  I want cukepatch to just work out the box without config
   
   @interactive
   Scenario: no config

@@ -1,7 +1,7 @@
 Feature: Rake task
   In order to ease the development process
   As a developer and CI server administrator
-  CukeMax should be executable via Rake
+  cukepatch should be executable via Rake
   
   Background:
     Given a standard Cucumber project directory structure

@@ -4,7 +4,7 @@ module CukePatch
 
     class << self
       def load_config(config = nil)
-        @config ||= YAML::load(IO.read(Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first))
+        @config ||= YAML::load(IO.read(Config.cukepatch_file))
         host = @config['host'] || 'https://limited-red.heroku.com'
         port = @config['port'] || ''
 
@@ -31,7 +31,7 @@ module CukePatch
       
       private
       def token_for(data)
-        data_string = @username +
+        data_string = @username.to_s +
                       @project_id.to_s +
                       build_data_string(data[:fails]) +
                       build_data_string(data[:passes]) +
