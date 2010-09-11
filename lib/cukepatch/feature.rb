@@ -4,7 +4,7 @@ module CukePatch
 
     class << self
       def load_config(config = nil)
-        @config ||= YAML::load(IO.read(Config.cukepatch_file))
+        @config ||= Config.config
         host = @config['host'] || 'https://limited-red.heroku.com'
         port = @config['port'] || ''
 

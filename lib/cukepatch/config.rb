@@ -14,6 +14,14 @@ module CukePatch
         end
       end
 
+      def config
+        @config ||= begin
+          cukepatch_config  = YAML::load(IO.read(cukepatch_file))
+          limited_red_config = YAML::load(IO.read(limited_red_file))
+          limited_red_config.merge(cukepatch_config)
+        end
+      end
+
       private
 
       def ensure_config_exists
@@ -63,14 +71,6 @@ module CukePatch
 
       def limited_red_file
         @limited_red_file ||= Dir.glob("#{home_dir}/.limited-red").first
-      end
-
-      def config
-        @config ||= begin     
-          cukepatch_config  = YAML::load(IO.read(cukepatch_file))
-          limited_red_config = YAML::load(IO.read(limited_red_file))
-          limited_red_config.merge(cukepatch_config)
-        end
       end
 
       def cukepatch_file
