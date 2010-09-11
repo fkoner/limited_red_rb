@@ -2,7 +2,7 @@ AfterConfiguration do |config|
   require 'cukepatch'
   config.options[:formats] << ['CukePatch::Formatter::Stats', config.out_stream]
   
-  cukepatch_config = CukePatch::Cli.load_and_validate_config
+  cukepatch_config = CukePatch::Config.load_and_validate_config
   if cukepatch_config
     cuke_stats = CukePatch::Stats.new(cukepatch_config)
   
