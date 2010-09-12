@@ -5,7 +5,7 @@ module CukePatch
     class << self
       def load_config(config = nil)
         @config ||= Config.config
-        host = @config['host'] || 'www.limited-red.com'
+        host = @config['host'] || 'https://limited-red.heroku.com'
         port = @config['port'] || ''
 
         @project_id = @config['project name']
@@ -35,6 +35,7 @@ module CukePatch
 
       def find_failing_features
         raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
+
         response = get("/projects/#{@project_id}/features/fails?user=#{@username}")
 
         return [] if response.nil? || response.empty?
