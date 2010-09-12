@@ -4,23 +4,29 @@ require 'cukepatch/feature'
 module CukePatch
   module Formatter  
     class Stats < Cucumber::Formatter::Json
+      
       def initialize(step_mother, path_or_io, options)
+        @t = Time.now
         @build_id = Time.now.to_i
         @step_mother = step_mother
         Feature.load_config
- 
+
         super
       end
 
-      def after_features(features)
-        feature_json = @json.to_json
-        print_summary(feature_json)
+      def after_feature(feature)
+        CukePatch::Feature.log_result(@build_id, :result => @current_object.to_json)
       end
 
-      def print_summary(feature_json)
-        CukePatch::Feature.log_results(@build_id, {:fails => failing_files, 
-                                                 :passes => passing_files,
-                                                 :features   => feature_json} )
+      def after_features(features)
+        print_summary
+      end
+
+      def print_summary
+        CukePatch::Feature.log_build(@build_id, {:fails => failing_files, 
+                                                 :passes => passing_files})
+                                                   
+        ThreadPool.wait_for_all_threads_to_finish
       end
 
       def failing_files
