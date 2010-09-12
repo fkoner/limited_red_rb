@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wilk"]
-  s.date = %q{2010-09-11}
+  s.date = %q{2010-09-12}
   s.description = %q{Run tests priorited by those that are most likely to fail}
   s.email = %q{joe@josephwilk.net}
   s.extra_rdoc_files = [
@@ -39,12 +39,13 @@ Gem::Specification.new do |s|
      "features/support/env.rb",
      "features/support/hooks.rb",
      "lib/cukepatch.rb",
+     "lib/cukepatch/config.rb",
      "lib/cukepatch/feature.rb",
      "lib/cukepatch/formatter/stats.rb",
+     "lib/cukepatch/gzip.rb",
      "lib/cukepatch/plugin.rb",
-     "lib/cukepatch/rake/task.rb",
      "lib/cukepatch/stats.rb",
-     "spec/cukepatch/cli_spec.rb",
+     "lib/cukepatch/thread_pool.rb",
      "spec/spec_helper.rb",
      "tasks/cucumber.rake",
      "tasks/rspec.rake",
@@ -57,8 +58,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Run tests priorited by those that are most likely to fail}
   s.test_files = [
-    "spec/cukepatch/cli_spec.rb",
-     "spec/spec_helper.rb"
+    "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
