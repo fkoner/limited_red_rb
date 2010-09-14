@@ -15,7 +15,8 @@ module CukePatch
       end
 
       def after_feature(feature)
-        CukePatch::Feature.log_result(@build_id, :result => @current_object.to_json)
+        compressed_result = Gzip.compress(@current_object.to_json)
+        CukePatch::Feature.log_result(@build_id, :result => compressed_result)
       end
 
       def after_features(features)
