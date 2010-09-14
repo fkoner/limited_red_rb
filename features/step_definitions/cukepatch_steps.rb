@@ -1,11 +1,11 @@
 CUCUMBER_EXECUTABLE = 'cucumber'
 
-Given /^I have run "cucumber ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$/ do |cucumber_opts, count, build|
+Given /^I have run "(.*)cucumber ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$/ do |pre_options, cucumber_opts, count, build|
   count ||= 1
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
     count.to_i.times do
-      run "#{CUCUMBER_EXECUTABLE} -q #{cucumber_opts}"
+      run "#{pre_options + " "}#{CUCUMBER_EXECUTABLE} -q #{cucumber_opts}"
       Then "STDERR should be empty"
     end
   end
