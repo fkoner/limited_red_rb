@@ -42,3 +42,8 @@ end
 Then /^"([^\"]*)" should not be run$/ do |feature_file|
   last_stdout.should_not include(feature_file)
 end
+
+Then /^"([^\"]*)" should be run$/ do |feature_file|
+  last_stdout.should include(feature_file)
+end
+

@@ -8,8 +8,11 @@ AfterConfiguration do |config|
       cuke_stats = CukePatch::Stats.new(cukepatch_config)
   
       feature_files = config.options[:paths]
-      feature_files = ["features"] if feature_files.empty? 
-      config.options[:paths] = cuke_stats.feature_files + feature_files
+      feature_files = ["features"] if feature_files.empty?
+
+      prioritised_features = cuke_stats.feature_files & config.feature_files
+      
+      config.options[:paths] = prioritised_features + feature_files
     else
       puts "Aborting Cucumber run"
       exit
