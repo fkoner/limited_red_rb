@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cukepatch}
-  s.version = "0.1.0"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wilk"]
-  s.date = %q{2010-09-12}
+  s.date = %q{2010-09-14}
   s.description = %q{Run tests priorited by those that are most likely to fail}
   s.email = %q{joe@josephwilk.net}
   s.extra_rdoc_files = [
@@ -30,8 +30,9 @@ Gem::Specification.new do |s|
      "features/auto_configure.feature",
      "features/multiple_projects.feature",
      "features/rake_task.feature",
-     "features/recording_step_definitions.feature",
      "features/run_tests_that_matter.feature",
+     "features/running_cucumber_without_recording.feature",
+     "features/running_subset_of_features.feature",
      "features/step_definitions/cucumber_steps.rb",
      "features/step_definitions/cuke_max_steps.rb",
      "features/step_definitions/cukepatch_steps.rb",
