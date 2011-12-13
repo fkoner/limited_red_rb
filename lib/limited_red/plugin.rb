@@ -3,9 +3,9 @@ AfterConfiguration do |config|
     require 'limited_red'
     config.options[:formats] << ['LimitedRed::Formatter::Stats', config.out_stream]
   
-    cukepatch_config = LimitedRed::Config.load_and_validate_config
-    if cukepatch_config
-      cuke_stats = LimitedRed::Stats.new(cukepatch_config)
+    limited_red_config = LimitedRed::Config.load_and_validate_config
+    if limited_red_config
+      cuke_stats = LimitedRed::Stats.new(limited_red_config)
   
       feature_files = config.options[:paths]
       feature_files = ["features"] if feature_files.empty?
