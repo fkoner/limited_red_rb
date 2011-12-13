@@ -1,17 +1,17 @@
-= CukeMax
+= Limited Red Client
 
 == Docs
 
-https://github.com/josephwilk/cukemax-client/wikis
+https://github.com/josephwilk/limited-red-client/wikis
 
 == Running tests
 
   rake
 
 == Authors
-* Joseph Wilk
+* Joseph Wilk <joe@josephwilk.net>
 
 
 == Copyright
 
-Copyright (c) 2010 Joseph Wilk. See LICENSE for details.
+Copyright (c) 2010,2011 Joseph Wilk. See LICENSE for details.
