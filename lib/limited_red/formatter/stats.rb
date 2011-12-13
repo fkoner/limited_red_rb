@@ -16,7 +16,7 @@ module LimitedRed
 
       def after_feature(feature)
         compressed_result = Gzip.compress(@current_object.to_json)
-        CukePatch::Feature.log_result(@build_id, :result => compressed_result)
+        LimitedRed::Feature.log_result(@build_id, :result => compressed_result)
       end
 
       def after_features(features)
@@ -24,7 +24,7 @@ module LimitedRed
       end
 
       def print_summary
-        CukePatch::Feature.log_build(@build_id, {:fails => failing_files, 
+        LimitedRed::Feature.log_build(@build_id, {:fails => failing_files, 
                                                  :passes => passing_files})
                                                    
         ThreadPool.wait_for_all_threads_to_finish
