@@ -1,4 +1,4 @@
-module CukePatch
+module LimitedRed
   class ThreadPool
     class << self
       attr_writer :threads

@@ -1,6 +1,6 @@
 Feature: Auto Configure
   In order to save precious seconds of my life
-  I want cukepatch to just work out the box without config
+  I want limited-red to just work out the box without config
   
   @interactive
   Scenario: no config
@@ -8,7 +8,7 @@ Feature: Auto Configure
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch/plugin'
+      require 'limited_red/plugin'
     """
     When I run "cucumber features" in "build"
     Then "features/fickle.feature" should be run first

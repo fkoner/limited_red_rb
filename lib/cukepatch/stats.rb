@@ -1,4 +1,4 @@
-module CukePatch
+module LimitedRed
   class Stats
     def initialize(config)
       Feature.load_config(config)
@@ -10,7 +10,7 @@ module CukePatch
     end
 
     def failing_features
-      CukePatch::Feature.find_failing_features
+      LimitedRed::Feature.find_failing_features
     end 
   end
 end

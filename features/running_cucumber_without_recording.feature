@@ -5,7 +5,7 @@ Feature: Running cucumber without recording
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukepatch.yml" with:
+    And a file named "limited_red.yml" with:
     """
       host: localhost
       port: 9292
@@ -16,7 +16,7 @@ Feature: Running cucumber without recording
     And a file named "features/support/env.rb" with:
     """
     $LOAD_PATH.unshift(CUCUMBER_LIB)
-    require 'cukepatch/plugin'
+    require 'limited_red/plugin'
     """
   
   Scenario: Turning off

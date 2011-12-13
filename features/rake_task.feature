@@ -1,11 +1,11 @@
 Feature: Rake task
   In order to ease the development process
   As a developer and CI server administrator
-  cukepatch should be executable via Rake
+  limited-red should be executable via Rake
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "cukepatch.yml" with:
+    And a file named "limited_red.yml" with:
       """
         host: localhost
         port: 9292
@@ -27,7 +27,7 @@ Feature: Rake task
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch/plugin'
+      require 'limited_red/plugin'
     """
     And I have run rake cucumber
     When I run rake cucumber

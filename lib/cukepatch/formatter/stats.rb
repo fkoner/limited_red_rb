@@ -1,7 +1,7 @@
 require 'cucumber/formatter/json'
-require 'cukepatch/feature'
+require 'limited_red/feature'
 
-module CukePatch
+module LimitedRed
   module Formatter  
     class Stats < Cucumber::Formatter::Json
       

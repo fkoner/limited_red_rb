@@ -1,10 +1,10 @@
 Feature: Multiple projects
   In order to have multiple intelligent builds
-  I want cukepatch to work across multiple projects
+  I want limited-red to work across multiple projects
 
   Scenario: two different cucumber projects
     Given a Cucumber project "build_1" has a failing feature called "antifickle.feature"
-    And a file named "build_1/cukepatch.yml" with:
+    And a file named "build_1/limited_red.yml" with:
     """
       project name:   build_1
       username: josephwilk
@@ -15,10 +15,10 @@ Feature: Multiple projects
     And a file named "build_1/features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch/plugin'
+      require 'limited_red/plugin'
     """
     And a Cucumber project "build_2" has a failing feature called "fickle.feature"
-    And a file named "build_2/cukepatch.yml" with:
+    And a file named "build_2/limited_red.yml" with:
     """
       project name:   build_2
       username: josephwilk
@@ -29,7 +29,7 @@ Feature: Multiple projects
     And a file named "build_2/features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'cukepatch/plugin'
+      require 'limited_red/plugin'
     """ 
     And I have run "cucumber features" 1 time in "build_1"
     And I have run "cucumber features" 1 time in "build_2"

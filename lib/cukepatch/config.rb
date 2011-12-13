@@ -1,4 +1,4 @@
-module CukePatch
+module LimitedRed
   class Config
     class << self
       def load_and_validate_config
@@ -6,7 +6,7 @@ module CukePatch
         if valid_config?
           config
         else
-          errors = "Make sure you have the following set in your cukepatch.yml:\n"
+          errors = "Make sure you have the following set in your limited_red.yml:\n"
           errors += " * project name\n" unless config['project name']
           errors += " * username\n" unless config['username']
           errors += " * api key\n" unless config['api key']
@@ -33,7 +33,7 @@ module CukePatch
             f.write("api key: #{details['api key']}\n")
           end
           
-          File.open('cukepatch.yml', 'w') do |f|
+          File.open('limited_red.yml', 'w') do |f|
             f.write("project name: #{details['project name']}\n")
           end
         end
@@ -74,7 +74,7 @@ module CukePatch
       end
 
       def cukepatch_file
-        @cukepatch_file ||= Dir.glob('{,.config/,config/}cukepatch{.yml,.yaml}').first
+        @cukepatch_file ||= Dir.glob('{,.config/,config/}limited_red{.yml,.yaml}').first
       end
       
       private
