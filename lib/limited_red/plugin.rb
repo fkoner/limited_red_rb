@@ -1,11 +1,7 @@
 AfterConfiguration do |config|
   unless ENV['STOP_RECORDING']
     require 'limited_red'
-    
-    
-    require 'ruby-debug'
-    debugger
-    
+  
     options = config.instance_variable_get("@options")
     options[:formats] << ['LimitedRed::Formatter::Stats', config.out_stream]
   
