@@ -1,7 +1,7 @@
 require 'zlib'
 require 'stringio'
 
-module CukePatch
+module LimitedRed
   module Gzip
     class Stream < StringIO
       def close; rewind; end

@@ -5,7 +5,7 @@ Feature: Rake task
   
   Background:
     Given a standard Cucumber project directory structure
-    And a file named "limited_red.yml" with:
+    And a file named ".limited_red" with:
       """
         host: localhost
         port: 9292

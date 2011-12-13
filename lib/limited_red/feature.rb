@@ -1,4 +1,4 @@
-module CukePatch
+module LimitedRed
   class Feature
     include HTTParty
 

@@ -6,32 +6,32 @@ Given /^I have run "(.*)cucumber ([^\"]*)"(?: (\d+) times?(?: in "([^\"]*)")?)?$
   in_current_dir do
     count.to_i.times do
       run "#{pre_options + " "}#{CUCUMBER_EXECUTABLE} -q #{cucumber_opts}"
-      Then "STDERR should be empty"
+      step "STDERR should be empty"
     end
   end
 end
 
 Given /^a Cucumber project "([^\"]*)" has a failing feature called "([^\"]*)"$/ do |dir, file|
-  Given %Q{a standard Cucumber project directory structure in "#{dir}"}
+  step %Q{a standard Cucumber project directory structure in "#{dir}"}
   feature = <<-EOF
     Feature: Fickle
       Scenario: Fail
         Given failing
 EOF
-  And %Q{a file named "#{dir}/features/#{file}" with:}, feature
+  step %Q{a file named "#{dir}/features/#{file}" with:}, feature
   steps = <<-EOF
     Given "failing" do
       fail
     end
 EOF
-  And %Q{a file named "#{dir}/features/step_definitions/steps.rb" with:}, steps 
+  step %Q{a file named "#{dir}/features/step_definitions/steps.rb" with:}, steps 
 end
 
 When /^I run "cucumber ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
     run "#{CUCUMBER_EXECUTABLE} #{cucumber_opts}"
-    Then "STDERR should be empty"
+    step "STDERR should be empty"
   end
 end
 

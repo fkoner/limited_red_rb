@@ -16,24 +16,33 @@ module LimitedRed
 
       def config
         @config ||= begin
-          cukepatch_config  = YAML::load(IO.read(cukepatch_file))
-          limited_red_config = YAML::load(IO.read(limited_red_file))
-          limited_red_config.merge(cukepatch_config)
+          limited_red_project_config  = load_yaml(limited_red_project_config_file)
+          limited_red_shared_config = load_yaml(limited_red_shared_config_file)
+          limited_red_shared_config.merge(limited_red_project_config)
         end
       end
 
       private
+      
+      def load_yaml(file)
+        if file
+          content = IO.read(file)
+          YAML::load(content)
+        else
+          {}
+        end
+      end
 
       def ensure_config_exists
-        unless cukepatch_yml_defined?
+        unless limited_red_project_config_file_exists?
           details = ask_for_setup_details
           
-          File.open(home_dir + '/.limited-red', 'w') do |f|
+          File.open('#{home_dir}/.limited-red', 'w') do |f|
             f.write("username: #{details['username']}\n")
             f.write("api key: #{details['api key']}\n")
           end
           
-          File.open('limited_red.yml', 'w') do |f|
+          File.open('.limited_red.yml', 'w') do |f|
             f.write("project name: #{details['project name']}\n")
           end
         end
@@ -65,16 +74,16 @@ module LimitedRed
         config['api key']
       end
 
-      def cukepatch_yml_defined?
-        cukepatch_file
+      def limited_red_project_config_file_exists?
+        limited_red_project_config_file
       end
 
-      def limited_red_file
-        @limited_red_file ||= Dir.glob("#{home_dir}/.limited-red").first
+      def limited_red_shared_config_file
+        @limited_red_file ||= Dir.glob("#{home_dir}/.limited_red").first
       end
 
-      def cukepatch_file
-        @cukepatch_file ||= Dir.glob('{,.config/,config/}limited_red{.yml,.yaml}').first
+      def limited_red_project_config_file
+        @cukepatch_file ||= Dir.glob('{,.config/,config/}\.limited_red').first
       end
       
       private

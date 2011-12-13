@@ -10,8 +10,8 @@ EOF
     fail
   end
 EOF
-  Given %Q{a file named "#{name}" with:}, feature
-  Given %Q{a file named "features/step_definitions/fail_steps.rb" with:}, steps
+  step %Q{a file named "#{name}" with:}, feature
+  step %Q{a file named "features/step_definitions/fail_steps.rb" with:}, steps
 end
 
 Given /^the feature "([^\"]*)" is deleted$/ do |file|
@@ -53,6 +53,6 @@ Given /^a feature named "([^\"]*)" which (?:always )?passes$/ do |name|
    Given /^passing$/ do
    end
  EOF
-  Given %Q{a file named "#{name}" with:}, feature
-  Given %Q{a file named "features/step_definitions/pass_steps.rb" with:}, steps
+  step %Q{a file named "#{name}" with:}, feature
+  step %Q{a file named "features/step_definitions/pass_steps.rb" with:}, steps
 end

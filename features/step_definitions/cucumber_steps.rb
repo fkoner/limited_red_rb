@@ -64,7 +64,7 @@ end
 
 Then /^it should (fail|pass) with$/ do |success, output|
   last_stdout.should == output
-  Then("it should #{success}")
+  step("it should #{success}")
 end
 
 Then /^the output should contain$/ do |text|
@@ -81,7 +81,7 @@ end
 
 Then /^it should (fail|pass) with JSON$/ do |success, text|
   JSON.parse(last_stdout).should == JSON.parse(text)
-  Then("it should #{success}")
+  step("it should #{success}")
 end
 
 Then /^"([^"]*)" should contain$/ do |file, text|

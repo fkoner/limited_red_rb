@@ -4,7 +4,7 @@ Feature: Multiple projects
 
   Scenario: two different cucumber projects
     Given a Cucumber project "build_1" has a failing feature called "antifickle.feature"
-    And a file named "build_1/limited_red.yml" with:
+    And a file named "build_1/.limited_red" with:
     """
       project name:   build_1
       username: josephwilk
@@ -18,7 +18,7 @@ Feature: Multiple projects
       require 'limited_red/plugin'
     """
     And a Cucumber project "build_2" has a failing feature called "fickle.feature"
-    And a file named "build_2/limited_red.yml" with:
+    And a file named "build_2/.limited_red" with:
     """
       project name:   build_2
       username: josephwilk

@@ -1,8 +1,10 @@
-source "http://gemcutter.org"
+source :rubygems
+
 gem "httparty"
 gem "cucumber"
 gem "json"
 
-# Testing
-gem "rspec", :group => :test
-gem "mongo", :group => :test
+group :development,:test do
+  gem "rspec"
+  gem "mongo"
+end

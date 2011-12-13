@@ -1,11 +1,11 @@
 require 'httparty'
 require 'json'
-class CukeMaxClient
+class LimitedRedClient
   include HTTParty
 end
 
 When /^I go to (.*)$/ do |url|
-  @body = CukeMaxClient.get(url)
+  @body = LimitedRedClient.get(url)
 end
 
 Then /^I should see JSON:$/ do |json_string|
