@@ -25,7 +25,7 @@ module LimitedRed
 
       def print_summary
         LimitedRed::Feature.log_build(@build_id, {:fails => failing_files, 
-                                                 :passes => passing_files})
+                                                  :passes => passing_files})
                                                    
         ThreadPool.wait_for_all_threads_to_finish
       end
