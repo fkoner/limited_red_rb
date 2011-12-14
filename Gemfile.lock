@@ -1,5 +1,5 @@
 GEM
-  remote: http://gemcutter.org/
+  remote: http://rubygems.org/
   specs:
     bson (1.5.1)
     builder (3.0.0)
@@ -10,6 +10,8 @@ GEM
       json (>= 1.4.6)
       term-ansicolor (>= 1.0.6)
     diff-lcs (1.1.3)
+    fakefs (0.4.0)
+    fakeweb (1.3.0)
     gherkin (2.7.1)
       json (>= 1.4.6)
     httparty (0.8.1)
@@ -35,6 +37,8 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber
+  fakefs
+  fakeweb
   httparty
   json
   mongo

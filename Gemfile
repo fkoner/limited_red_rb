@@ -8,4 +8,5 @@ group :development,:test do
   gem "rspec"
   gem "mongo"
   gem "fakeweb"
+  gem "fakefs"
 end
