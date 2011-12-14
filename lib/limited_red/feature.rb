@@ -3,8 +3,8 @@ module LimitedRed
     include HTTParty
 
     class << self
-      def load_config(config = nil)
-        @config ||= Config.config
+      def load_config(config)
+        @config ||= config #Config.config
         host = @config['host'] || 'https://limited-red.heroku.com'
         port = @config['port'] || ''
 
@@ -17,20 +17,21 @@ module LimitedRed
       def log_result(build_id, data)
         data = data.merge({:user => @username, :token => token_for(data.merge(:build_id => build_id))})
 
-        ThreadPool.with_a_thread_run do
+        #ThreadPool.with_a_thread_run do
           result = post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
           puts error_message(result) if error?(result)
-        end
+        #end
+        
       end
 
       def log_build(build_id, data)
         data[:build_id] = build_id
         data = data.merge({:user => @username, :build_id => build_id, :token => token_for(data)})
         
-        ThreadPool.with_a_thread_run do
+        #ThreadPool.with_a_thread_run do
           result = post("/projects/#{@project_id}/builds", :body => data)
           puts error_message(result) if error?(result)
-        end
+        #end
       end
 
       def find_failing_features
