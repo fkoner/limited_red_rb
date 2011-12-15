@@ -4,12 +4,17 @@ require 'rubygems'
 require 'httparty'
 require 'cucumber'
 
-require 'limited_red/gzip'
-require 'limited_red/feature'
-require 'limited_red/thread_pool'
-require 'limited_red/stats'
-require 'limited_red/config'
-require 'limited_red/formatter/stats'
-
 module LimitedRed
+  ROOT = File.expand_path('..', __FILE__)
+
+  autoload :Gzip,          "#{ROOT}/limited_red/gzip"
+  autoload :HttParty,      "#{ROOT}/limited_red/httparty"
+  autoload :FeatureLogger, "#{ROOT}/limited_red/feature_logger"
+  autoload :ThreadPool,    "#{ROOT}/limited_red/thread_pool"
+  autoload :Stats,         "#{ROOT}/limited_red/stats"
+  autoload :Config,        "#{ROOT}/limited_red/config"
+
+  module Formatter
+    autoload :Stats, "#{ROOT}/limited_red/formatter/stats"
+  end
 end

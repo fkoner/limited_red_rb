@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module LimitedRed
-  describe Feature do
+  describe FeatureLogger do
     def test_config
       {'host' => 'localhost',
       'port' => '80',
