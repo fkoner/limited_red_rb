@@ -1,5 +1,5 @@
 module LimitedRed
-  class FeatureLogger
+  class Client
     class << self
       def load_config(config, out = STDOUT)
         @config ||= config #Config.config
@@ -18,7 +18,6 @@ module LimitedRed
           result = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
           @out.puts error_message(result) if error?(result)
         end
-        
       end
 
       def log_build(build_id, data)
@@ -30,7 +29,7 @@ module LimitedRed
           @out.puts error_message(result) if error?(result)
         end
       end
-
+      
       def find_failing_features
         raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
 
@@ -39,7 +38,7 @@ module LimitedRed
         return [] if response.nil? || response.empty?
         response.code == 200 ? response.body.split(" ") : []
       end
-      
+            
       private
       def token_for(data)
         data_string = @username.to_s +

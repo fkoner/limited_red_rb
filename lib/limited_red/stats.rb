@@ -1,7 +1,7 @@
 module LimitedRed
   class Stats
     def initialize(config)
-      @feature_logger = FeatureLogger.new(config)
+      Client.load_config(config)
     end
 
     def feature_files
@@ -10,7 +10,7 @@ module LimitedRed
     end
 
     def failing_features
-      @feature_logger.find_failing_features
+      Client.find_failing_features
     end 
   end
 end
