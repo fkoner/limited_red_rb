@@ -97,7 +97,7 @@ module LimitedRed
       
     private
     def home_dir
-      ENV['HOME'] || File.expand_path('~')
+      ENV['HOME'] ||  File.expand_path('~') #Dir.home
     end
       
     def guess_project_name

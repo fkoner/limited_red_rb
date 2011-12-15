@@ -3,14 +3,6 @@ require 'fakefs/spec_helpers'
 
 module LimitedRed
   describe Config do
-    #TODO: Use fakefs when it works with expand
-    #include FakeFS::SpecHelpers
-    
-    before(:each) do
-      #FileUtils.mkdir_p "/home/josephwilk/test_project/"
-      #Dir.chdir '/home/josephwilk/test_project'
-    end
-    
     class FakeSTDIN
       def initialize
       end
@@ -29,11 +21,16 @@ module LimitedRed
     let(:fake_stdout){StringIO.new}
     
     before(:each) do
-      Dir.stub!(:glob).with("/Users/josephwilk/.limited_red").and_return([])
+      ENV['HOME'] = '/home/josephwilk'
+      Dir.stub!(:glob).with("/home/josephwilk/.limited_red").and_return([])
       Dir.stub!(:glob).with('.limited_red').and_return([])
     end
     
-    context "Running limited for the first time on a machine" do
+    after(:each) do
+      ENV['HOME'] = nil
+    end
+    
+    context "Running limited red for the first time on a machine" do
       it "should create a .limited-red config file in my home directory and my project directory" do
         fake_stdin.add_input({:project_name => "test_project",
                               :username => 'josephwilk',
@@ -41,10 +38,45 @@ module LimitedRed
 
         config = Config.new(fake_stdout, fake_stdin)
 
-        File.should_receive(:open).with("/Users/josephwilk/.limited_red", "w")
+        File.should_receive(:open).with("/home/josephwilk/.limited_red", "w")
         File.should_receive(:open).with(".limited_red", "w")
         
         config.load_and_validate_config
+      end
+    end
+    
+    context "Running limited red after having setup config files" do
+      include FakeFS::SpecHelpers
+
+      before(:each) do
+        Dir.stub!(:glob).with("/home/josephwilk/.limited_red").and_return(['/home/josephwilk/.limited_red'])
+        Dir.stub!(:glob).with('.limited_red').and_return(['.limited_red'])
+        
+        @shared_config = <<-EOS
+host: localhost
+port: 9292
+username: josephwilk
+api key: 123
+EOS
+
+        @project_config = <<-EOS
+project name: cuke_internal_tests
+EOS
+      end
+      
+      it "should load the config from the two configuration files" do
+        config = Config.new(fake_stdout, fake_stdin)
+        
+        IO.stub!(:read).with('/home/josephwilk/.limited_red').and_return(@shared_config)
+        IO.stub!(:read).with('.limited_red').and_return(@project_config)
+        
+        config = config.load_and_validate_config
+        
+        config.should == {'host' => 'localhost',
+                          'port' => 9292,
+                          'username' => 'josephwilk',
+                          'api key' => 123,
+                          'project name' => 'cuke_internal_tests'}
       end
       
     end
