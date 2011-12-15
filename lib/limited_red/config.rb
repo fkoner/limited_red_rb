@@ -1,7 +1,8 @@
 module LimitedRed
   class Config
-    def initialize(stdin = STDIN)
-      @stdin = stdin
+    def initialize(out_stream = STDOUT, in_stream = STDIN)
+      @in = in_stream
+      @out = out_stream
     end
     
     def self.load_and_validate_config
@@ -17,7 +18,7 @@ module LimitedRed
         errors += " * project name\n" unless config['project name']
         errors += " * username\n" unless config['username']
         errors += " * api key\n" unless config['api key']
-        print errors
+        @out.print errors
       end
     end
 
@@ -43,8 +44,7 @@ module LimitedRed
     def ensure_config_exists
       unless limited_red_project_config_file_exists?
         details = ask_for_setup_details
-        debugger
-        FileUtils.touch("#{home_dir}/.limited_red")
+
         File.open("#{home_dir}/.limited_red", 'w') do |f|
           f.write("username: #{details['username']}\n")
           f.write("api key: #{details['api key']}\n")
@@ -59,19 +59,19 @@ module LimitedRed
 
     def ask_for_setup_details
       details = {}
-      print "Project name"
+      @out.print "Project name"
       project_name = guess_project_name
-      print " (default: #{project_name})" if project_name
-      print ": "
-      name = @stdin.readline.strip
+      @out.print " (default: #{project_name})" if project_name
+      @out.print ": "
+      name = @in.readline.strip
       name = name.empty? ? project_name : name
       name.downcase
       details['project name'] = name.gsub(/[^a-zA-Z0-9']+/, "-")
-      print "username: "
-      username = @stdin.readline.strip
+      @out.print "username: "
+      username = @in.readline.strip
       details['username'] = username
-      print "api key: "
-      api_key = @stdin.readline.strip
+      @out.print "api key: "
+      api_key = @in.readline.strip
       details['api key'] = api_key
       details
     end
@@ -88,11 +88,11 @@ module LimitedRed
     end
 
     def limited_red_shared_config_file
-      @limited_red_file ||= Dir.glob("#{home_dir}/.limited_red").first
+      @global_config_file ||= Dir.glob("#{home_dir}/.limited_red").first
     end
 
     def limited_red_project_config_file
-      @cukepatch_file ||= Dir.glob('.limited_red').first
+      @project_config_file ||= Dir.glob('.limited_red').first
     end
       
     private
