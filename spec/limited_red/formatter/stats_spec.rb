@@ -23,6 +23,14 @@ module LimitedRed::Formatter
     end
     
     describe "#after_feature" do
+      let(:fake_feature){mock("fake_feature", :to_json => "{'FEATURE JSON'}")}
+
+      class FakeGherkinFormatter
+        def initialize(json)
+          @feature_hash = json
+        end
+      end
+      
       it "should use the current time as the build id posted to the client" do
         client = mock(LimitedRed::Client)
         LimitedRed::Client.stub(:new).and_return(client)
@@ -30,13 +38,12 @@ module LimitedRed::Formatter
         Time.stub!(:now).and_return(1324468723)
         
         stats = Stats.new(fake_step_mother, fake_path_or_io, {},)
+        stats.instance_variable_set("@gf", FakeGherkinFormatter.new(fake_feature))
         
         client.should_receive(:log_result).with(1324468723, anything)
         
         stats.after_feature(mock("feature result"))
       end
-
-      let(:fake_feature){mock("fake_feature", :to_json => "{'FEATURE JSON'}")}
       
       it "should log the feature json with the client" do
         client = mock(LimitedRed::Client)
@@ -45,7 +52,7 @@ module LimitedRed::Formatter
         stats = Stats.new(fake_step_mother, fake_path_or_io, {})
         
         #TODO: How does this get set by Cucumber/Gherkin?
-        stats.instance_variable_set("@current_object", fake_feature)
+        stats.instance_variable_set("@gf", FakeGherkinFormatter.new(fake_feature))
         
         client.should_receive(:log_result).with(anything, {:result => "{'FEATURE JSON'}"} )
         

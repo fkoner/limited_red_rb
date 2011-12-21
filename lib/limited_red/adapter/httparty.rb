@@ -16,7 +16,7 @@ module LimitedRed
       
       def self.encode_and_compress(data)
         compressed_result = Gzip.compress(data)
-        Base64.encode64(data)
+        Base64.encode64(compressed_result)
       end
       
     end

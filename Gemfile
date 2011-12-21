@@ -14,4 +14,5 @@ group :development, :test do
   gem "guard-rspec"
   gem "guard-cucumber"
   gem "rb-fsevent"
+  gem "childprocess"
 end

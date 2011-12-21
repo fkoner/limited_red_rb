@@ -15,7 +15,12 @@ module LimitedRed
       end
 
       def after_feature(feature)
-        @client.log_result(@build_id, :result => @current_object.to_json)
+        if supports_feature_hash?
+          json = feature_hash.to_json
+          @client.log_result(@build_id, :result => json)
+        else
+          puts "Error: Gherkin version is out of date and does not support @feature_hash: #{gherkin_formatter.instance_variables}"
+        end
       end
 
       def after_features(features)
@@ -40,6 +45,19 @@ module LimitedRed
         passing = passing.collect { |s| (s.is_a?(Cucumber::Ast::OutlineTable::ExampleRow)) ? s.scenario_outline : s }
         passing.map{|pass| pass.file_colon_line}
       end
+      
+      def supports_feature_hash?
+        gherkin_formatter.instance_variables.include?(:@feature_hash)
+      end
+      
+      def feature_hash
+        gherkin_formatter.instance_variable_get("@feature_hash")
+      end
+      
+      def gherkin_formatter
+        @gf
+      end
+      
     end
   end
 end
