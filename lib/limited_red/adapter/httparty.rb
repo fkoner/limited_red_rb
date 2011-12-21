@@ -2,7 +2,7 @@ module LimitedRed
   module Adapter
     class HttParty
       def self.new(config, options = {})
-        host = config['host'] || 'https://limited-red.heroku.com'
+        host = config['host'] || 'https://limited-red-data-service.heroku.com/'
         port = config['port'] || ''
         uri = "#{host}#{port == '' ? '' : ":#{port}"}"
       

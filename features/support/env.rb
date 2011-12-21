@@ -26,13 +26,13 @@ module ServiceRunner
   
   def self.start_limited_red_server
     @processes ||= {}
-    return if @processes.has_key?('limited_red_server')
-    FileUtils.cd('../limited_red_server') do
-      process = @processes[service_name] = ChildProcess.build('rackup', 'config.ru')
+    return if @processes.has_key?('limited_red_data_service')
+    FileUtils.cd(File.dirname(__FILE__) + '/../../../limited_red_data_service') do
+      process = @processes['limited_red_data_service'] = ChildProcess.build('rackup', 'config.ru')
       process.io.inherit! #If there are errors running ensure we see them
       process.start
 
-      sleep(0) until service_ready?('http://localhost:4567')
+      sleep(0) until service_ready?('http://localhost:9292')
     end
   end
   
