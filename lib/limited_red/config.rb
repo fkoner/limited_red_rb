@@ -6,7 +6,7 @@ module LimitedRed
     end
     
     def self.load_and_validate_config
-      new().load_and_validate_config
+      new.load_and_validate_config
     end
         
     def load_and_validate_config

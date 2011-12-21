@@ -1,7 +1,7 @@
 module LimitedRed
   class Stats
     def initialize(config)
-      Client.load_config(config)
+      @client = Client.new(config)
     end
 
     def feature_files
@@ -10,7 +10,7 @@ module LimitedRed
     end
 
     def failing_features
-      Client.find_failing_features
+      @client.find_failing_features
     end 
   end
 end

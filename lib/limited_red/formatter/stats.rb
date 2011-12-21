@@ -9,14 +9,14 @@ module LimitedRed
         @t = Time.now
         @build_id = Time.now.to_i
         @step_mother = step_mother
-        LimitedRed::Client.load_config
+        @client = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config)
 
         super
       end
 
       def after_feature(feature)
         compressed_result = Gzip.compress(@current_object.to_json)
-        LimitedRed::Client.log_result(@build_id, :result => compressed_result)
+        @client.log_result(@build_id, :result => compressed_result)
       end
 
       def after_features(features)
@@ -24,8 +24,8 @@ module LimitedRed
       end
 
       def print_summary
-        LimitedRed::Client.log_build(@build_id, {:fails => failing_files, 
-                                                        :passes => passing_files})
+         @client.log_build(@build_id, {:fails => failing_files, 
+                                       :passes => passing_files})
                                                    
         ThreadPool.wait_for_all_threads_to_finish
       end

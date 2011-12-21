@@ -9,34 +9,51 @@ module LimitedRed
       'username' => 'josephwilk',
       'api key' => '123'}
     end
+
+    class FakeHTTPAdapter
+    end
+
+    let(:fake_stdout){ StringIO.new }
+    let(:fake_http_adapter){ FakeHTTPAdapter.new }
     
     describe '#log_result' do
+
       it "should post the build data" do
-        Client.load_config(test_config)
+        client = Client.new(test_config, fake_stdout, fake_http_adapter)
                 
-        FakeWeb.register_uri(:post, "http://localhost/projects/blah/builds/123/results", :body => "")
+        fake_http_adapter.should_receive(:post).with("/projects/blah/builds/123/results", {:body=> {:user=>"josephwilk", 
+                                                                                                    :fails=>"", 
+                                                                                                    :passes=>"", 
+                                                                                                    :result=>"", 
+                                                                                                    :build_id=>123, 
+                                                                                                    :token=>"c858f6946b5f2c34f6c4e39d4aae862526a9c358"}})
         
         build_data = {:fails => "",
                       :passes => "",
                       :result => "",
                       :build_id => 123}
         
-        Client.log_result(build_id = 123, build_data)
+        client.log_result(build_id = 123, build_data)
       end
     end
     
     describe '#log_build' do
       it "should post the build data" do
-        Client.load_config(test_config)
+        client = Client.new(test_config, fake_stdout, fake_http_adapter)
         
-        FakeWeb.register_uri(:post, "http://localhost/projects/blah/builds", :body => "")
+        fake_http_adapter.should_receive(:post).with("/projects/blah/builds", {:body=> {:user=>"josephwilk", 
+                                                                                        :passes=>"", 
+                                                                                        :fails=>"",
+                                                                                        :result=>"", 
+                                                                                        :build_id=>123, 
+                                                                                        :token=>"c858f6946b5f2c34f6c4e39d4aae862526a9c358"}})
                 
         build_data = {:fails => "",
                       :passes => "",
                       :result => "",
                       :build_id => 123}
         
-        Client.log_build(build_id = 123, build_data)
+        client.log_build(build_id = 123, build_data)
       end
     end
   end
