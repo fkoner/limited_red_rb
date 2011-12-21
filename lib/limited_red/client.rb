@@ -1,6 +1,6 @@
 module LimitedRed
   class Client
-    def initialize(config, out = STDOUT, adapter=nil)
+    def initialize(config, out = STDOUT, adapter = nil, thread_pool = ThreadPool)
       @config ||= config
       @out = out
       @project_id = @config['project name']
@@ -8,26 +8,27 @@ module LimitedRed
       @api_key = @config['api key']
         
       @adapter = adapter || LimitedRed::Adapter::HttParty.new(@config)
+      @thread_pool = thread_pool
     end
 
     def log_result(build_id, data)
       data[:result] = @adapter.encode_and_compress(data[:result])
       data = data.merge({:user => @username, :token => token_for(data.merge(:build_id => build_id))})
 
-      #ThreadPool.with_a_thread_run do
+      @thread_pool.with_a_thread_run do
         result = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
         @out.puts error_message(result) if error?(result)
-      #end
+      end
     end
 
     def log_build(build_id, data)
       data[:build_id] = build_id
       data = data.merge({:user => @username, :build_id => build_id, :token => token_for(data)})
         
-      #ThreadPool.with_a_thread_run do
+      @thread_pool.with_a_thread_run do
         result = @adapter.post("/projects/#{@project_id}/builds", :body => data)
         @out.puts error_message(result) if error?(result)
-      #end
+      end
     end
       
     def find_failing_features

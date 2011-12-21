@@ -22,7 +22,7 @@ module LimitedRed
     describe '#log_result' do
 
       it "should post the build data" do
-        client = Client.new(test_config, fake_stdout, fake_http_adapter)
+        client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
                 
         fake_http_adapter.should_receive(:post).with("/projects/blah/builds/123/results", {:body=> {:user=>"josephwilk", 
                                                                                                     :fails=>"", 
@@ -42,7 +42,7 @@ module LimitedRed
     
     describe '#log_build' do
       it "should post the build data" do
-        client = Client.new(test_config, fake_stdout, fake_http_adapter)
+        client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
         
         fake_http_adapter.should_receive(:post).with("/projects/blah/builds", {:body=> {:user=>"josephwilk", 
                                                                                         :passes=>"", 
