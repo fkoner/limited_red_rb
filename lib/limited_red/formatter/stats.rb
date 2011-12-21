@@ -15,8 +15,7 @@ module LimitedRed
       end
 
       def after_feature(feature)
-        compressed_result = Gzip.compress(@current_object.to_json)
-        @client.log_result(@build_id, :result => compressed_result)
+        @client.log_result(@build_id, :result => @current_object.to_json)
       end
 
       def after_features(features)

@@ -32,6 +32,7 @@ module LimitedRed
     
     context "Running limited red for the first time on a machine" do
       it "should create a .limited-red config file in my home directory and my project directory" do
+        pending
         fake_stdin.add_input({:project_name => "test_project",
                               :username => 'josephwilk',
                               :api_key => '123'})

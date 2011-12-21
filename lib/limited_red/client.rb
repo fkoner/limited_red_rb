@@ -7,10 +7,11 @@ module LimitedRed
       @username = @config['username']
       @api_key = @config['api key']
         
-      @adapter = adapter || LimitedRed::HttParty.new(@config)
+      @adapter = adapter || LimitedRed::Adapter::HttParty.new(@config)
     end
 
     def log_result(build_id, data)
+      data[:result] = @adapter.encode_and_compress(data[:result])
       data = data.merge({:user => @username, :token => token_for(data.merge(:build_id => build_id))})
 
       #ThreadPool.with_a_thread_run do

@@ -11,6 +11,9 @@ module LimitedRed
     end
 
     class FakeHTTPAdapter
+      def encode_and_compress(data)
+        data
+      end
     end
 
     let(:fake_stdout){ StringIO.new }
