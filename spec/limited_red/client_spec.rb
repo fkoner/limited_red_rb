@@ -59,5 +59,15 @@ module LimitedRed
         client.log_build(build_id = 123, build_data)
       end
     end
+    
+    describe "#find_failing_features" do
+      it "should make a request for the failing features" do
+        client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
+        
+        fake_http_adapter.should_receive(:get).with("/projects/blah/features/fails?user=josephwilk")
+                
+        client.find_failing_features
+      end
+    end
   end
 end

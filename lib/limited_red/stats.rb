@@ -9,6 +9,8 @@ module LimitedRed
       files.select{|file| File.exists?(file)}
     end
 
+    private
+
     def failing_features
       @client.find_failing_features
     end 

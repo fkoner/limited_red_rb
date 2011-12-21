@@ -6,17 +6,17 @@ module LimitedRed
         port = config['port'] || ''
         uri = "#{host}#{port == '' ? '' : ":#{port}"}"
       
-        Adapter.base_uri(uri)
-        Adapter
+        HttPartyAdapter.base_uri(uri)
+        HttPartyAdapter
       end
     end
 
     class HttPartyAdapter
       include HTTParty
       
-      def encode_and_compress(data)
+      def self.encode_and_compress(data)
         compressed_result = Gzip.compress(data)
-        Base64.encode(data)
+        Base64.encode64(data)
       end
       
     end

@@ -12,7 +12,6 @@ module LimitedRed::Formatter
     end
     
     describe "#new" do
-
       
       it "should create a limited red client with config" do
         LimitedRed::Config.stub!(:load_and_validate_config).and_return(fake_config)
