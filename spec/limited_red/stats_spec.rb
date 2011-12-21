@@ -13,7 +13,7 @@ module LimitedRed
           FileUtils.touch("a.feature")
         end
         
-        it "should return a list of features that exists" do
+        it "should return a unique list of features that still exists on the file system" do
           Client.stub!(:new).and_return(fake_client)
           stats = Stats.new({})
         
