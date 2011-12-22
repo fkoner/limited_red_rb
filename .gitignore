@@ -3,3 +3,7 @@ dump.rdb
 .DS_Store
 pkg/*
 .bundle
+.*.swp
+.*.swn
+.*.swo
+*.gem
