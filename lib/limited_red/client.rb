@@ -62,7 +62,13 @@ module LimitedRed
     end
       
     def error_message(error_msg)
-      "\nLimited Red had a problem logging your test results.\n  #{error_msg}\n\n"
+      if ENV['LIMITED_RED_ENV'] == 'test' || ENV['LIMITED_RED_ENV'] == 'development'
+        message = #{error_msg}
+      else
+        message = ""
+      end
+      
+      "\nLimited Red had a problem logging your test results.\n#{message}"
     end
   end
 end
