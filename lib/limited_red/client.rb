@@ -62,8 +62,8 @@ module LimitedRed
     end
       
     def error_message(error_msg)
-      if ENV['LIMITED_RED_ENV'] == 'test' || ENV['LIMITED_RED_ENV'] == 'development'
-        message = #{error_msg}
+      if (ENV['LIMITED_RED_ENV'] == 'test') || (ENV['LIMITED_RED_ENV'] == 'development')
+        message = error_msg
       else
         message = ""
       end
