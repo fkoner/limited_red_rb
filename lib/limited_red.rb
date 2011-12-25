@@ -5,7 +5,7 @@ require 'httparty'
 require 'cucumber'
 
 module LimitedRed
-  ROOT = File.expand_path('..', __FILE__)
+  ROOT = File.expand_path('..', __FILE__).to_s
 
   autoload :Gzip,       "#{ROOT}/limited_red/gzip"
   autoload :Client,     "#{ROOT}/limited_red/client"
