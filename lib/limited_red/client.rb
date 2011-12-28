@@ -54,8 +54,10 @@ module LimitedRed
                     (data[:build_id].to_s) + 
                     LimitedRed::Version::STRING +
                     @api_key.to_s
-
-      Digest::SHA1.hexdigest(data_string)
+      
+      sha512 = Digest::SHA512.new
+      digest = sha512.digest(data_string)
+      Digest.hexencode(digest)
     end
 
     def build_data_string(data)

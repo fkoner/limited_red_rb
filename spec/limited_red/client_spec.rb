@@ -34,7 +34,7 @@ module LimitedRed
                                                                                                     :result=>"", 
                                                                                                     :build_id=>123, 
                                                                                                     :version => '6.6.6',
-                                                                                                    :token => "edf350c95c01be8830049d15ff9ec72cd35d729a"}})
+                                                                                                    :token => "24877e67c60f45ba7330f1113a782118e7dafab9e9684bcba68e88528c05398e7d28498783bb2727ed62bb9e49863e6b6581341cc527923ecc533eed5c55d517"}})
         
         build_data = {:fails => "",
                       :passes => "",
@@ -55,7 +55,7 @@ module LimitedRed
                                                                                         :result=>"", 
                                                                                         :build_id=>123, 
                                                                                         :version => '6.6.6',
-                                                                                        :token=>"edf350c95c01be8830049d15ff9ec72cd35d729a"}})
+                                                                                        :token=>"24877e67c60f45ba7330f1113a782118e7dafab9e9684bcba68e88528c05398e7d28498783bb2727ed62bb9e49863e6b6581341cc527923ecc533eed5c55d517"}})
                 
         build_data = {:fails => "",
                       :passes => "",
