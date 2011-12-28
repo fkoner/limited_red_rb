@@ -1,7 +1,9 @@
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+require "limited_red/version"
 
 Gem::Specification.new do |s|
   s.name = %q{limited_red}
-  s.version = "0.2.6"
+  s.version = LimitedRed::Version::STRING
   s.platform    = Gem::Platform::RUBY
   s.license     = "MIT"
   s.authors = ["Joseph Wilk"]
