@@ -14,7 +14,7 @@ module LimitedRed
     def log_result(build_id, data)
       data[:result] = @adapter.encode_and_compress(data[:result])
       data = data.merge({:user => @username, 
-                         :version => LimitedRed::Version::String,
+                         :version => LimitedRed::Version::STRING,
                          :token => token_for(data.merge(:build_id => build_id))})
 
       @thread_pool.with_a_thread_run do
@@ -26,7 +26,7 @@ module LimitedRed
     def log_build(build_id, data)
       data[:build_id] = build_id
       data = data.merge({:user => @username, 
-                         :version => LimitedRed::Version::String,
+                         :version => LimitedRed::Version::STRING,
                          :build_id => build_id, :token => token_for(data)})
         
       @thread_pool.with_a_thread_run do
@@ -52,7 +52,7 @@ module LimitedRed
                     build_data_string(data[:passes]) +
                     (data[:result] ? data[:result] : "") +
                     (data[:build_id].to_s) + 
-                    LimitedRed::Version::String +
+                    LimitedRed::Version::STRING +
                     @api_key.to_s
 
       Digest::SHA1.hexdigest(data_string)

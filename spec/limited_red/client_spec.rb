@@ -18,6 +18,10 @@ module LimitedRed
 
     let(:fake_stdout){ StringIO.new }
     let(:fake_http_adapter){ FakeHTTPAdapter.new }
+
+    before(:all) do
+      LimitedRed::Version::STRING = '6.6.6'
+    end
     
     describe '#log_result' do
 
@@ -29,7 +33,8 @@ module LimitedRed
                                                                                                     :passes=>"", 
                                                                                                     :result=>"", 
                                                                                                     :build_id=>123, 
-                                                                                                    :token=>"c858f6946b5f2c34f6c4e39d4aae862526a9c358"}})
+                                                                                                    :version => '6.6.6',
+                                                                                                    :token => "edf350c95c01be8830049d15ff9ec72cd35d729a"}})
         
         build_data = {:fails => "",
                       :passes => "",
@@ -49,7 +54,8 @@ module LimitedRed
                                                                                         :fails=>"",
                                                                                         :result=>"", 
                                                                                         :build_id=>123, 
-                                                                                        :token=>"c858f6946b5f2c34f6c4e39d4aae862526a9c358"}})
+                                                                                        :version => '6.6.6',
+                                                                                        :token=>"edf350c95c01be8830049d15ff9ec72cd35d729a"}})
                 
         build_data = {:fails => "",
                       :passes => "",
