@@ -2,7 +2,6 @@ $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(_
 
 require 'rubygems'
 require 'httparty'
-require 'cucumber'
 
 module LimitedRed
   ROOT = File.expand_path('..', __FILE__).to_s

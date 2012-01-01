@@ -27,7 +27,7 @@ Feature: Rake task
     And a file named "features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'limited_red/plugin'
+      require 'limited_red/plugins/cucumber'
     """
     And I have run rake cucumber
     When I run rake cucumber

@@ -16,7 +16,7 @@ Feature: Run features prioritising the most likely to fail
     And a file named "features/support/env.rb" with:
     """
     $LOAD_PATH.unshift(CUCUMBER_LIB)
-    require 'limited_red/plugin'
+    require 'limited_red/plugins/cucumber'
     """
 
   Scenario: Frequent failing feature

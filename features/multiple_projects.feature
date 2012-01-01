@@ -15,7 +15,7 @@ Feature: Multiple projects
     And a file named "build_1/features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'limited_red/plugin'
+      require 'limited_red/plugins/cucumber'
     """
     And a Cucumber project "build_2" has a failing feature called "fickle.feature"
     And a file named "build_2/.limited_red" with:
@@ -29,7 +29,7 @@ Feature: Multiple projects
     And a file named "build_2/features/support/env.rb" with:
     """
       $LOAD_PATH.unshift(CUCUMBER_LIB)
-      require 'limited_red/plugin'
+      require 'limited_red/plugins/cucumber'
     """ 
     And I have run "cucumber features" 1 time in "build_1"
     And I have run "cucumber features" 1 time in "build_2"

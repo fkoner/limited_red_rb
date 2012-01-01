@@ -3,7 +3,7 @@ AfterConfiguration do |config|
     require 'limited_red'
   
     options = config.instance_variable_get("@options")
-    options[:formats] << ['LimitedRed::Formatter::Stats', config.out_stream]
+    options[:formats] << ['LimitedRed::Cucumber::Formatter::Stats', config.out_stream]
   
     limited_red_config = LimitedRed::Config.load_and_validate_config
     if limited_red_config
