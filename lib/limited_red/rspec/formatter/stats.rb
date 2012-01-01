@@ -1,5 +1,6 @@
 require 'rspec/core/formatters/helpers'
 require 'rspec/core/formatters/base_formatter'
+require 'json'
 
 module LimitedRed
   module Rspec

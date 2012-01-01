@@ -8,42 +8,36 @@ end
 Given /^a spec named "([^\"]*)" which always fails$/ do |filename|
   
   file_content = <<EOS
-  require 'spec_helper'
+require 'spec_helper'
   
-  describe 'something' do
-    it "should fail" do
-      false.should == true
-    end
+describe 'something' do
+  it "should fail" do
+    false.should == true
   end
+end
 EOS
   
-  in_current_dir do
-    FileUtils.mkdir_p(File.dirname(filename)) unless File.directory?(File.dirname(filename))
-    File.open(filename, 'w') { |f| f << file_content }
-  end
+  create_file(filename,file_content)
 end
 
 Given /^a spec named "([^\"]*)" which always passes$/ do |filename|
   file_content = <<EOS
-  require 'spec_helper'
+require 'spec_helper'
   
-  describe 'something' do
-    it "should fail" do
-      false.should == true
-    end
-  end
-EOS
-  
-  in_current_dir do
-    FileUtils.mkdir_p(File.dirname(filename)) unless File.directory?(File.dirname(filename))
-    File.open(filename, 'w') { |f| f << file_content }
+describe 'something' do
+  it "should fail" do
+    false.should == true
   end
 end
+EOS
+  
+  create_file(filename,file_content)
+end
 
-Given /^I have run "([^"]*)"$/ do |specs|
+Given /^I have run "rspec ([^"]*)"$/ do |specs|
   run "rspec #{specs}"
 end
 
-When /^I run "([^"]*)"$/ do |specs|
+When /^I run "rspec ([^"]*)"$/ do |specs|
   run "rspec #{specs}"
 end

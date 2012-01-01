@@ -12,7 +12,8 @@ Feature: Rspec
     """
     And a file named "spec/spec_helper.rb" with:
     """
-    	require 'limited_red/plugins/rspec'
+	  $LOAD_PATH.unshift(CUCUMBER_LIB)
+      require 'limited_red/plugins/rspec'
     """
 
   Scenario: Frequent failing feature
