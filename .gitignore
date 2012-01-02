@@ -7,3 +7,4 @@ pkg/*
 .*.swn
 .*.swo
 *.gem
+examples/*
