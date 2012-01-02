@@ -13,12 +13,14 @@ module LimitedRed
   autoload :Stats,          "#{ROOT}/limited_red/stats"
   autoload :Config,         "#{ROOT}/limited_red/config"
   autoload :Version,        "#{ROOT}/limited_red/version"
-
+  
   module Adapter
     autoload :HttParty, "#{ROOT}/limited_red/adapter/httparty"
   end
 
-  module Formatter
-    autoload :Stats, "#{ROOT}/limited_red/formatter/stats"
+  module Cucumber
+    module Formatter
+      autoload :Stats, "#{ROOT}/limited_red/cucumber/formatter/stats"
+    end
   end
 end
