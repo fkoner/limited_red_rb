@@ -27,8 +27,8 @@ RSpec.configure do |config|
   end
   
   config.after(:all) do
-    @client.log_build(BUILD_ID, {:fails => failing_files,
+    @client.log_build(BUILD_ID, {:type => 'rspec'
+                                 :fails => failing_files,
                                  :passes => passing_files})
   end
-
 end
