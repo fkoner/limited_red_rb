@@ -7,7 +7,7 @@ AfterConfiguration do |config|
   
     limited_red_config = LimitedRed::Config.load_and_validate_config
     if limited_red_config
-      cuke_stats = LimitedRed::Stats.new(limited_red_config)
+      cuke_stats = LimitedRed::Stats.new(limited_red_config.merge(:type => :cucumber))
   
       feature_files = options[:paths]
       feature_files = ["features"] if feature_files.empty?

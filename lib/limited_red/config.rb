@@ -5,14 +5,14 @@ module LimitedRed
       @out = out_stream
     end
     
-    def self.load_and_validate_config
-      new.load_and_validate_config
+    def self.load_and_validate_config(type)
+      new.load_and_validate_config(type)
     end
         
-    def load_and_validate_config
+    def load_and_validate_config(type)
       ensure_config_exists
       if valid_config?
-        config
+        config.merge({:type => type})
       else
         errors = "Make sure you have the following set in your .limited_red:\n"
         errors += " * project name\n" unless config['project name']

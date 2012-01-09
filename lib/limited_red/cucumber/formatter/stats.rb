@@ -11,7 +11,7 @@ module LimitedRed
           @t = Time.now
           @build_id = Time.now.to_i
           @step_mother = step_mother
-          @client = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config)
+          @client = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config(:cucumber))
 
           super
         end

@@ -7,14 +7,13 @@ module LimitedRed::Cucumber::Formatter
     let(:fake_config){ mock(Config) }
     
     before(:each) do
-      LimitedRed::Config.stub!(:load_and_validate_config).and_return(fake_config)
+      LimitedRed::Config.stub!(:load_and_validate_config).with(:cucumber).and_return(fake_config)
       LimitedRed::ThreadPool.stub!(:wait_for_all_threads_to_finish)
     end
     
     describe "#new" do
-      
       it "should create a limited red client with config" do
-        LimitedRed::Config.stub!(:load_and_validate_config).and_return(fake_config)
+        LimitedRed::Config.stub!(:load_and_validate_config).with(:cucumber).and_return(fake_config)
         
         LimitedRed::Client.should_receive(:new).with(fake_config)
         
@@ -37,7 +36,7 @@ module LimitedRed::Cucumber::Formatter
 
         Time.stub!(:now).and_return(1324468723)
         
-        stats = Stats.new(fake_step_mother, fake_path_or_io, {},)
+        stats = Stats.new(fake_step_mother, fake_path_or_io, {})
         stats.instance_variable_set("@gf", FakeGherkinFormatter.new(fake_feature))
         
         client.should_receive(:log_result).with(1324468723, anything)

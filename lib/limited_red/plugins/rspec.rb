@@ -1,9 +1,8 @@
 require 'limited_red'
 require 'limited_red/client'
 
-
 RSpec.configure do |config|
-  CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config)
+  CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config(:rspec))
   BUILD_ID = Time.now
 
   fails = []
@@ -14,8 +13,7 @@ RSpec.configure do |config|
     full_description = example.metadata[:full_description]
     file, line = *(example.metadata[:example_group_block].source_location)
 
-    json = {:type => 'rspec',
-            :file =>  file, 
+    json = {:file =>  file, 
             :line => line, 
             :uri => full_description}.to_json
   
@@ -31,8 +29,7 @@ RSpec.configure do |config|
   end
   
   config.after(:all) do
-    CLIENT.log_build(BUILD_ID, {:type => 'rspec',
-                                 :fails => fails,
-                                 :passes => passes})
+    CLIENT.log_build(BUILD_ID, {:fails => fails,
+                                :passes => passes})
   end
 end

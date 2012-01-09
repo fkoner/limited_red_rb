@@ -4,10 +4,10 @@ module LimitedRed
   describe Client do
     def test_config
       {'host' => 'localhost',
-      'port' => '80',
-      'project name' => 'blah', 
-      'username' => 'josephwilk',
-      'api key' => '123'}
+       'port' => '80',
+       'project name' => 'blah', 
+       'username' => 'josephwilk',
+       'api key' => '123'}
     end
 
     class FakeHTTPAdapter
