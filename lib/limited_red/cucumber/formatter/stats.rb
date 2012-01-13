@@ -21,7 +21,7 @@ module LimitedRed
             json = feature_hash.to_json
             @client.log_result(@build_id, :result => json)
           else
-            puts "Error: Gherkin version is out of date and does not support @feature_hash: #{gherkin_formatter.instance_variables}"
+            puts "[limited_red]:Error: Having trouble working with your Gherkin version. Is it upto date? Report this to joe@josephwilk.net, its his fault.", ""
           end
         end
 
@@ -49,7 +49,7 @@ module LimitedRed
         end
       
         def supports_feature_hash?
-          gherkin_formatter.instance_variables.include?(:@feature_hash)
+          gherkin_formatter.instance_variables.include?('@feature_hash')
         end
       
         def feature_hash
