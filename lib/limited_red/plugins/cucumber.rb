@@ -5,7 +5,7 @@ AfterConfiguration do |config|
     options = config.instance_variable_get("@options")
     options[:formats] << ['LimitedRed::Cucumber::Formatter::Stats', config.out_stream]
   
-    limited_red_config = LimitedRed::Config.load_and_validate_config(:type => :cucumber)
+    limited_red_config = LimitedRed::Config.load_and_validate_config(:cucumber)
     if limited_red_config
       cuke_stats = LimitedRed::Stats.new(limited_red_config)
   
