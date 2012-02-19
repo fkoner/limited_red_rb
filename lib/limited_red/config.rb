@@ -12,7 +12,7 @@ module LimitedRed
     def load_and_validate_config(type)
       ensure_config_exists
       if valid_config?
-        config.merge({:type => type})
+        config.merge({'type' => type})
       else
         errors = "Make sure you have the following set in your .limited_red:\n"
         errors += " * project name\n" unless config['project name']

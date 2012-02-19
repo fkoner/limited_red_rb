@@ -3,10 +3,10 @@ module LimitedRed
     class HttParty
       def self.new(config, options = {})
         services = {}
-        services[:rspec] = 'https://limited-red-unit-data-service.heroku.com/'
-        services[:cucumber] = 'https://limited-red-data-service.heroku.com/'
+        services['rspec'] = 'https://limited-red-unit-data-service.heroku.com/'
+        services['cucumber'] = 'https://limited-red-data-service.heroku.com/'
         
-        host = config['host'] || services[options[:type]]
+        host = config['host'] || services[options['type']]
         port = config['port'] || ''
         uri = "#{host}#{port == '' ? '' : ":#{port}"}"
       

@@ -42,7 +42,7 @@ module LimitedRed
         File.should_receive(:open).with("/home/josephwilk/.limited_red", "w")
         File.should_receive(:open).with(".limited_red", "w")
         
-        config.load_and_validate_config(:cucumber)
+        config.load_and_validate_config('cucumber')
       end
     end
     
@@ -71,14 +71,14 @@ EOS
         IO.stub!(:read).with('/home/josephwilk/.limited_red').and_return(@shared_config)
         IO.stub!(:read).with('.limited_red').and_return(@project_config)
         
-        config = config.load_and_validate_config(:cucumber)
+        config = config.load_and_validate_config('cucumber')
         
         config.should == {'host' => 'localhost',
                           'port' => 9292,
                           'username' => 'josephwilk',
                           'api key' => 123,
                           'project name' => 'cuke_internal_tests',
-                          :type => :cucumber}
+                          'type' => 'cucumber'}
       end
       
     end

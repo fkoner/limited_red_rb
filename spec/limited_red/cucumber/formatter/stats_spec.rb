@@ -7,13 +7,13 @@ module LimitedRed::Cucumber::Formatter
     let(:fake_config){ mock(Config) }
     
     before(:each) do
-      LimitedRed::Config.stub!(:load_and_validate_config).with(:cucumber).and_return(fake_config)
+      LimitedRed::Config.stub!(:load_and_validate_config).with('cucumber').and_return(fake_config)
       LimitedRed::ThreadPool.stub!(:wait_for_all_threads_to_finish)
     end
     
     describe "#new" do
       it "should create a limited red client with config" do
-        LimitedRed::Config.stub!(:load_and_validate_config).with(:cucumber).and_return(fake_config)
+        LimitedRed::Config.stub!(:load_and_validate_config).with('cucumber').and_return(fake_config)
         
         LimitedRed::Client.should_receive(:new).with(fake_config)
         
