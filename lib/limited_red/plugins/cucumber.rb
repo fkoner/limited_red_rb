@@ -5,9 +5,9 @@ AfterConfiguration do |config|
     options = config.instance_variable_get("@options")
     options[:formats] << ['LimitedRed::Cucumber::Formatter::Stats', config.out_stream]
   
-    limited_red_config = LimitedRed::Config.load_and_validate_config
+    limited_red_config = LimitedRed::Config.load_and_validate_config(:type => :cucumber)
     if limited_red_config
-      cuke_stats = LimitedRed::Stats.new(limited_red_config.merge(:type => :cucumber))
+      cuke_stats = LimitedRed::Stats.new(limited_red_config)
   
       feature_files = options[:paths]
       feature_files = ["features"] if feature_files.empty?
