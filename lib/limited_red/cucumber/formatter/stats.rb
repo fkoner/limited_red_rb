@@ -49,11 +49,11 @@ module LimitedRed
         end
       
         def supports_feature_hash?
-          gherkin_formatter.instance_variables.include?('@feature_hash')
+          gherkin_formatter.instance_variables.include?(:@feature_hash) || gherkin_formatter.instance_variables.include?('@feature_hash')
         end
       
         def feature_hash
-          gherkin_formatter.instance_variable_get("@feature_hash")
+          gherkin_formatter.instance_variable_get("@feature_hash") || gherkin_formatter.instance_variable_get(:@feature_hash)
         end
       
         def gherkin_formatter
