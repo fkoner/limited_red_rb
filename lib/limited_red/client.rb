@@ -18,8 +18,8 @@ module LimitedRed
                          :token => token_for(data.merge(:build_id => build_id))})
 
       @thread_pool.with_a_thread_run do
-        result = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
-        @out.puts error_message(result) if error?(result)
+        response = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
+        log(response) if error?(response)
       end
     end
 
@@ -30,8 +30,8 @@ module LimitedRed
                          :build_id => build_id, :token => token_for(data)})
         
       @thread_pool.with_a_thread_run do
-        result = @adapter.post("/projects/#{@project_id}/builds", :body => data)
-        @out.puts error_message(result) if error?(result)
+        response = @adapter.post("/projects/#{@project_id}/builds", :body => data)
+        log(response) if error?(response)
       end
     end
       
@@ -40,8 +40,11 @@ module LimitedRed
 
       response = @adapter.get("/projects/#{@project_id}/features/fails?user=#{@username}")
 
-      return [] if response.nil? || response.empty?
-      response.code == 200 ? response.body.split(" ") : []
+      if error?(response) || response.empty?
+        return []
+      else
+        response.body.split(" ")
+      end
     end
             
     private
@@ -64,18 +67,16 @@ module LimitedRed
       data == "" || data.nil? ? "" : data.join("")
     end
 
-    def error?(result)
-      result && !result.body.empty?
+    def error?(response)
+      response && (response.code != 200)
+    end
+    
+    def log(response)
+      @out.puts(error_message(response))
     end
       
-    def error_message(error_msg)
-      if (ENV['LIMITED_RED_ENV'] == 'test') || (ENV['LIMITED_RED_ENV'] == 'development')
-        message = error_msg
-      else
-        message = ""
-      end
-      
-      "\nLimited Red had a problem logging your test results.\n#{message}"
+    def error_message(response)
+      "\nLimited Red had a problem logging your test results: #{response.body}"
     end
   end
 end
