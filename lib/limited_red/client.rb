@@ -40,7 +40,7 @@ module LimitedRed
 
       response = @adapter.get("/projects/#{@project_id}/features/fails?user=#{@username}")
 
-      if error?(response) || response.empty?
+      if response.nil? || response.empty? || error?(response)
         return []
       else
         response.body.split(" ")
@@ -68,7 +68,7 @@ module LimitedRed
     end
 
     def error?(response)
-      response.nil? || (response.code != 200)
+      response.code != 200
     end
     
     def log(response)
