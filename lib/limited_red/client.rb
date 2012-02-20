@@ -68,7 +68,7 @@ module LimitedRed
     end
 
     def error?(response)
-      response && (response.code != 200)
+      response.nil? || (response.code != 200)
     end
     
     def log(response)
@@ -76,7 +76,7 @@ module LimitedRed
     end
       
     def error_message(response)
-      "\nLimited Red had a problem logging your test results: #{response.body}"
+      "\nLimited Red had a problem logging your test results: #{response ? response.body : ''}"
     end
   end
 end
