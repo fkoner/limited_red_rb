@@ -16,8 +16,7 @@ AfterConfiguration do |config|
       
       options[:paths] = prioritised_features + feature_files
     else
-      puts "Aborting Cucumber run"
-      exit
+      puts "Warning: Limited Red unable to activated"
     end
   end
 end
