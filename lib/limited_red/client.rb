@@ -31,7 +31,7 @@ module LimitedRed
         
       @thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds", :body => data)
-        log(response) if error?(response)
+        log(response) if response && error?(response)
       end
     end
       
@@ -68,7 +68,7 @@ module LimitedRed
     end
 
     def error?(response)
-      response.code != 200
+      response && response.code != 200
     end
     
     def log(response)
