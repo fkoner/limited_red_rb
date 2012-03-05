@@ -16,7 +16,7 @@ AfterConfiguration do |config|
       
       options[:paths] = prioritised_features + feature_files
     else
-      puts "Warning: Limited Red unable to activated"
+      puts "Warning: Limited Red unable to load"
     end
   end
 end
