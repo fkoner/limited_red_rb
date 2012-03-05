@@ -2,11 +2,11 @@ AfterConfiguration do |config|
   unless ENV['STOP_RECORDING']
     require 'limited_red'
   
-    options = config.instance_variable_get("@options")
-    options[:formats] << ['LimitedRed::Cucumber::Formatter::Stats', config.out_stream]
-  
     limited_red_config = LimitedRed::Config.load_and_validate_config('cucumber')
     if limited_red_config
+      options = config.instance_variable_get("@options")
+      options[:formats] << ['LimitedRed::Cucumber::Formatter::Stats', config.out_stream]
+      
       cuke_stats = LimitedRed::Stats.new(limited_red_config)
   
       feature_files = options[:paths]
