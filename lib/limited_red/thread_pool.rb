@@ -20,7 +20,13 @@ module LimitedRed
       end
       
       def wait_for_all_threads_to_finish
-        @threads.each { |thread| thread.join }
+        @threads.each do |thread|
+          begin
+            thread.join
+          rescue
+            puts "[Limited Red] Error trying to post results to Limited Red: #{$!}"
+          end
+        end
       end
       
     end

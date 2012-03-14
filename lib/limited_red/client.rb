@@ -38,7 +38,12 @@ module LimitedRed
     def find_failing_features
       raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
 
-      response = @adapter.get("/projects/#{@project_id}/features/fails?user=#{@username}")
+      begin
+        response = @adapter.get("/projects/#{@project_id}/features/fails?user=#{@username}")
+      rescue
+        puts "[Limited Red] Unable to reach www.limited-red.com. No tests will be recorded."
+        return []
+      end
 
       if response.nil? || response.empty? || error?(response)
         return []
