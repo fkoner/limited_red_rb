@@ -2,7 +2,7 @@
 
 == Docs
 
-https://github.com/josephwilk/limited-red-client/wikis
+https://github.com/limited-red/limited-red-rb/wikis
 
 == Running tests
 
