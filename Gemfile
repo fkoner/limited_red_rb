@@ -10,6 +10,12 @@ group :development do
   gem "fakeweb"
   gem "fakefs"
   gem "childprocess"
+
+  gem "guard"
+  gem "growl_notify"
+  gem "guard-rspec"
+  gem "guard-cucumber"
+  gem "rb-fsevent"
 end
 
 group :test do
@@ -17,10 +23,5 @@ group :test do
   gem "mongo"
   gem "fakeweb"
   gem "fakefs"
-  gem "guard"
-  gem "growl_notify"
-  gem "guard-rspec"
-  gem "guard-cucumber"
-  gem "rb-fsevent"
   gem "childprocess"
 end
