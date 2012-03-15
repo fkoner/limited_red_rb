@@ -14,6 +14,8 @@ require 'childprocess'
 
 require File.dirname(__FILE__) + "/cucumber_support"
 
+require 'limited_red/plugins/cucumber'
+
 module ServiceRunner
   def self.service_ready?(url)
     begin
