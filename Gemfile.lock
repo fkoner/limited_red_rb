@@ -17,16 +17,6 @@ GEM
     ffi (1.0.11)
     gherkin (2.9.0)
       json (>= 1.4.6)
-    growl_notify (0.0.3)
-      rb-appscript
-    guard (1.0.1)
-      ffi (>= 0.5.0)
-      thor (~> 0.14.6)
-    guard-cucumber (0.7.5)
-      cucumber (>= 0.10)
-      guard (>= 0.8.3)
-    guard-rspec (0.6.0)
-      guard (>= 0.10.0)
     httparty (0.8.1)
       multi_json
       multi_xml
@@ -35,7 +25,6 @@ GEM
       bson (~> 1.6.1)
     multi_json (1.1.0)
     multi_xml (0.4.2)
-    rb-appscript (0.6.1)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -45,7 +34,6 @@ GEM
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
     term-ansicolor (1.0.7)
-    thor (0.14.6)
 
 PLATFORMS
   ruby
@@ -55,10 +43,6 @@ DEPENDENCIES
   cucumber
   fakefs
   fakeweb
-  growl_notify
-  guard
-  guard-cucumber
-  guard-rspec
   httparty
   json
   mongo
