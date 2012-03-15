@@ -15,7 +15,6 @@ group :development do
   gem "growl_notify"
   gem "guard-rspec"
   gem "guard-cucumber"
-  gem "rb-fsevent"
 end
 
 group :test do
