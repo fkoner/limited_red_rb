@@ -10,4 +10,5 @@ group :development, :test do
   gem "fakeweb"
   gem "fakefs"
   gem "childprocess"
+  gem "rake"
 end
