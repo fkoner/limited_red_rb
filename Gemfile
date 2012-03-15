@@ -4,7 +4,15 @@ gem "httparty"
 gem "cucumber"
 gem "json"
 
-group :development, :test do
+group :development do
+  gem "rspec"
+  gem "mongo"
+  gem "fakeweb"
+  gem "fakefs"
+  gem "childprocess"
+end
+
+group :test do
   gem "rspec"
   gem "mongo"
   gem "fakeweb"
