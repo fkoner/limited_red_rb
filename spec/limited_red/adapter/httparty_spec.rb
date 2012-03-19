@@ -8,9 +8,7 @@ module LimitedRed::Adapter
       end
       
       it "should Gzip and base64 the data" do
-        http_party = HttParty.new({})
-
-        result = http_party.encode_and_compress("data")
+        result = HttPartyAdapter.encode_and_compress("data")
         
         result.should == gzip_and_encode("data")
       end

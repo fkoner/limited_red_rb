@@ -1,9 +1,8 @@
 require 'limited_red'
-require 'limited_red/client'
 require 'json'
 
 RSpec.configure do |config|
-  CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config(:rspec))
+  CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config('rspec'))
   BUILD_ID = Time.now.to_i
 
   fails = []
@@ -24,15 +23,21 @@ RSpec.configure do |config|
   
     if example.exception #Fail
       fails << file
+      FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => json)
+      FakeWeb.allow_net_connect = false
     else # Pass
       passes << file
+      FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => json)
+      FakeWeb.allow_net_connect = false
     end
   end
   
   config.after(:all) do
+    FakeWeb.allow_net_connect = true
     CLIENT.log_build(BUILD_ID, {:fails => fails,
                                 :passes => passes})
+    FakeWeb.allow_net_connect = false
   end
 end
