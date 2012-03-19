@@ -14,7 +14,10 @@ require 'childprocess'
 
 require File.dirname(__FILE__) + "/cucumber_support"
 
-require File.dirname(__FILE__) + '/../../lib/limited_red/plugins/cucumber'
+$:.unshift(File.dirname(__FILE__) + '/../../lib') unless $:.include?(File.dirname(__FILE__) + '/../../lib')
+
+#Use local plugin
+require 'limited_red/plugins/cucumber'
 
 module ServiceRunner
   def self.service_ready?(url)
