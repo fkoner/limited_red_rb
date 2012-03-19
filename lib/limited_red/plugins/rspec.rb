@@ -1,5 +1,6 @@
 require 'limited_red'
 require 'limited_red/client'
+require 'json'
 
 RSpec.configure do |config|
   CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config(:rspec))
@@ -11,7 +12,9 @@ RSpec.configure do |config|
   config.after(:each) do
     metadata = example.metadata
     full_description = example.metadata[:full_description]
-    file, line = *(example.metadata[:example_group_block].source_location)
+    
+    file = example.metadata[:file_path]
+    line = example.metadata[:line_number]
 
     json = {:file =>  file, 
             :line => line, 
@@ -20,11 +23,9 @@ RSpec.configure do |config|
     if example.exception #Fail
       fails << file
       CLIENT.log_result(BUILD_ID, :result => json)
-      puts "Client FAIL", file, line
     else # Pass
       passes << file
       CLIENT.log_result(BUILD_ID, :result => json)
-      puts "PASS", file, line
     end
   end
   
