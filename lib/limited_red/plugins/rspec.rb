@@ -4,7 +4,7 @@ require 'json'
 
 RSpec.configure do |config|
   CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config(:rspec))
-  BUILD_ID = Time.now
+  BUILD_ID = Time.now.to_i
 
   fails = []
   passes = []
@@ -14,6 +14,8 @@ RSpec.configure do |config|
     full_description = example.metadata[:full_description]
     
     file = example.metadata[:file_path]
+    file = file.gsub("#{Dir.pwd}/", '')
+
     line = example.metadata[:line_number]
 
     json = {:file =>  file, 
