@@ -18,6 +18,10 @@ module LimitedRed
     autoload :HttParty, "#{ROOT}/limited_red/adapter/httparty"
   end
 
+  module Rspec
+    autoload :Metadata, "#{ROOT}/limited_red/rspec/metadata"
+  end
+
   module Cucumber
     module Formatter
       autoload :Stats, "#{ROOT}/limited_red/cucumber/formatter/stats"
