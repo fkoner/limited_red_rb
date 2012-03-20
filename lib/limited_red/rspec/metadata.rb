@@ -22,7 +22,7 @@ module LimitedRed
       private
     
       def uri
-        scopes.map{|s| s.downcase.gsub(/\s+/, '-')}.join("-")
+        scopes.map{|s| s.to_s.downcase.gsub(/\s+/, '-')}.join("-")
       end
     
       def full_description
