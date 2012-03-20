@@ -20,7 +20,12 @@ module LimitedRed
     let(:fake_http_adapter){ FakeHTTPAdapter.new }
 
     before(:all) do
+      @version ||= LimitedRed::Version::STRING 
       LimitedRed::Version::STRING = '6.6.6'
+    end
+
+    after(:all) do
+      LimitedRed::Version::STRING = @version
     end
     
     describe '#log_result' do
