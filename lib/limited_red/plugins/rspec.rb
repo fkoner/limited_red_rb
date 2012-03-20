@@ -22,12 +22,12 @@ RSpec.configure do |config|
             :uri => full_description}.to_json
   
     if example.exception #Fail
-      fails << file
+      fails << "#{file}:#{line}"
       FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => json)
       FakeWeb.allow_net_connect = false
     else # Pass
-      passes << file
+      passes << "#{file}:#{line}"
       FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => json)
       FakeWeb.allow_net_connect = false
