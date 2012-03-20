@@ -34,7 +34,7 @@ RSpec.configure do |config|
     end
   end
   
-  config.after(:all) do
+  config.after(:suite) do
     FakeWeb.allow_net_connect = true
     CLIENT.log_build(BUILD_ID, {:fails => fails,
                                 :passes => passes})
