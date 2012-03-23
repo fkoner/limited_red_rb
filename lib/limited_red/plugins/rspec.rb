@@ -12,6 +12,9 @@ RSpec.configure do |config|
   
     if example.exception #Fail
       fails << metadata.file_and_line
+
+      metadata.add_exception(example.exception)
+      
       FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => metadata.to_json)
       FakeWeb.allow_net_connect = false

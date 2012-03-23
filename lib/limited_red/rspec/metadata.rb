@@ -8,11 +8,17 @@ module LimitedRed
       end
     
       def to_json
-        {:file => file, 
-         :line => line, 
-         :uri =>  uri,
-         :pretty_name => full_description,
-         :scopes => scopes}.to_json
+        hash = {:file => file, 
+                :line => line, 
+                :uri =>  uri,
+                :pretty_name => full_description,
+                :scopes => scopes}
+        hash = hash.merge({:error => @exception}) if @exception
+        hash.to_json
+      end
+
+      def add_exception(exception)
+        @exception = exception
       end
 
       def file_and_line
