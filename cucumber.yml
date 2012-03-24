@@ -1,2 +1,1 @@
 default: --tags ~@interactive --tags ~@wip
-server: --require features/step_definitions/ --require features/support/ --require features_server/
