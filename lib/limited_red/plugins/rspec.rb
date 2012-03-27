@@ -17,11 +17,13 @@ RSpec.configure do |config|
       
       FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => metadata.to_json)
+      CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :pass => false)
       FakeWeb.allow_net_connect = false
     else # Pass
       passes << metadata.file_and_line
       FakeWeb.allow_net_connect = true
       CLIENT.log_result(BUILD_ID, :result => metadata.to_json)
+      CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :pass => true)
       FakeWeb.allow_net_connect = false
     end
   end

@@ -59,6 +59,7 @@ module LimitedRed
                     build_data_string(data[:fails]) +
                     build_data_string(data[:passes]) +
                     (data[:result] ? data[:result] : "") +
+                    (data[:pass] ? data[:pass].to_s : "") +
                     (data[:build_id].to_s) + 
                     LimitedRed::Version::STRING +
                     @api_key.to_s
