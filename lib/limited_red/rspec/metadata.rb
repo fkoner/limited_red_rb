@@ -15,8 +15,7 @@ module LimitedRed
                 :scopes => scopes}
         if @exception
           hash = hash.merge({:error => {:message => @exception,
-                                        :type => @exception.class,
-                                        :backtrace => @exception.backtrace}})
+                                        :type => @exception.class}})
         end
         hash.to_json
       end
