@@ -59,7 +59,7 @@ module LimitedRed
                     build_data_string(data[:fails]) +
                     build_data_string(data[:passes]) +
                     (data[:result] ? data[:result] : "") +
-                    (data[:pass] ? data[:pass].to_s : "") +
+                    pass_string(data[:pass]) +
                     (data[:build_id].to_s) + 
                     LimitedRed::Version::STRING +
                     @api_key.to_s
@@ -67,6 +67,16 @@ module LimitedRed
       sha512 = Digest::SHA512.new
       digest = sha512.digest(data_string)
       Digest.hexencode(digest)
+    end
+    
+    def pass_string(pass)
+      if pass.nil?
+        return ""
+      elsif data[:pass]
+        return true.to_s
+      else
+        return false.to_s
+      end
     end
 
     def build_data_string(data)
