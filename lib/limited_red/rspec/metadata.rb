@@ -13,7 +13,11 @@ module LimitedRed
                 :uri =>  uri,
                 :pretty_name => full_description,
                 :scopes => scopes}
-        hash = hash.merge({:error => @exception}) if @exception
+        if @exception
+          hash = hash.merge({:error => {:message => @exception,
+                                        :type => @exception.class,
+                                        :backtrace => @exception.backtrace}})
+        end
         hash.to_json
       end
 
@@ -26,7 +30,6 @@ module LimitedRed
       end
       
       private
-    
       def uri
         scopes.map{|s| s.to_s.downcase.gsub(/\s+/, '-')}.join("-")
       end
