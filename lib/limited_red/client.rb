@@ -72,7 +72,7 @@ module LimitedRed
     def pass_string(pass)
       if pass.nil?
         return ""
-      elsif data[:pass]
+      elsif pass
         return true.to_s
       else
         return false.to_s
