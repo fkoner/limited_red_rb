@@ -16,14 +16,12 @@ RSpec.configure do |config|
       metadata.add_exception(example.exception)
   
       FakeWeb.allow_net_connect = true if defined?(FakeWeb)
-      CLIENT.log_result(BUILD_ID, :result => metadata.to_json)
-      #CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :pass => false)
+      CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :uri => metadata.uri)
       FakeWeb.allow_net_connect = false if defined?(FakeWeb)
     else # Pass
       passes << metadata.file_and_line
       FakeWeb.allow_net_connect = true
-      CLIENT.log_result(BUILD_ID, :result => metadata.to_json)
-      #CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :pass => true)
+      CLIENT.log_result(BUILD_ID, :result => metadata.to_json, :uri => metadata.uri)
       FakeWeb.allow_net_connect = false
     end
   end

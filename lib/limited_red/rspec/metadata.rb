@@ -27,12 +27,13 @@ module LimitedRed
       def file_and_line
         "#{file}:#{line}"
       end
-      
-      private
+
       def uri
         scopes.map{|s| s.to_s.downcase.gsub(/\s+/, '-')}.join("-")
       end
-    
+      
+      private
+
       def full_description
         @metadata[:full_description]
       end

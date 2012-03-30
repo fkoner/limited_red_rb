@@ -56,6 +56,7 @@ module LimitedRed
     def token_for(data)
       data_string = @username.to_s +
                     @project_id.to_s +
+                    (data[:uri] ?  data[:uri] : "") +
                     build_data_string(data[:fails]) +
                     build_data_string(data[:passes]) +
                     (data[:result] ? data[:result] : "") +
