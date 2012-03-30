@@ -11,6 +11,14 @@ module LimitedRed
       @thread_pool = thread_pool
     end
 
+    def log_fail_result(build_id, data)
+      log_result(build_id, data.merge(:pass => false))
+    end
+
+    def log_pass_result(build_id, data)
+      log_result(build_id, data.merge(:pass => true))
+    end
+
     def log_result(build_id, data)
       data[:result] = @adapter.encode_and_compress(data[:result])
       data = data.merge({:user => @username, 
