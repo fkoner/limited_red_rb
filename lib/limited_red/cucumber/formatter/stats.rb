@@ -19,7 +19,7 @@ module LimitedRed
         def after_feature(feature)
           if supports_feature_hash?
             json = feature_hash.to_json
-            @client.log_result(@build_id, :result => json)
+            @client.log_result(@build_id, :result => json, :uri => feature_hash['uri'])
           else
             puts "[limited_red]:Error: Having trouble working with your Gherkin version. Is it upto date? Report this to joe@josephwilk.net, its his fault.", ""
           end

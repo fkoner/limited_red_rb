@@ -12,11 +12,11 @@ module LimitedRed
     end
 
     def log_fail_result(build_id, data)
-      log_result(build_id, data.merge(:pass => false))
+      log_result(build_id, data.merge(:pass => 'false'))
     end
 
     def log_pass_result(build_id, data)
-      log_result(build_id, data.merge(:pass => true))
+      log_result(build_id, data.merge(:pass => 'true'))
     end
 
     def log_result(build_id, data)
@@ -25,10 +25,11 @@ module LimitedRed
                          :version => LimitedRed::Version::STRING,
                          :token => token_for(data.merge(:build_id => build_id))})
 
-      @thread_pool.with_a_thread_run do
+      #@thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
+        p response
         log(response) if error?(response)
-      end
+        #end
     end
 
     def log_build(build_id, data)
@@ -37,10 +38,10 @@ module LimitedRed
                          :version => LimitedRed::Version::STRING,
                          :build_id => build_id, :token => token_for(data)})
         
-      @thread_pool.with_a_thread_run do
+      #@thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds", :body => data)
         log(response) if response && error?(response)
-      end
+        #end
     end
       
     def find_failing_features
@@ -81,10 +82,8 @@ module LimitedRed
     def pass_string(pass)
       if pass.nil?
         return ""
-      elsif pass
-        return true.to_s
       else
-        return false.to_s
+        return pass
       end
     end
 

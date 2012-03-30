@@ -29,7 +29,7 @@ module LimitedRed::Rspec
 
           data = JSON.parse(@metadata.to_json)
 
-          data['scopes'].should == ['LimitedRed::Adapter::HttParty', '#encode_and_compress', 'should Gzip and base64 the data']
+          data['scopes'].should == ['LimitedRed::Adapter::HttZarty', '#encode_and_compress', 'should Gzip and base64 the data']
         end
       end
     end
