@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email = %q{joe@josephwilk.net}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.md"
   ]
   s.files        = Dir.glob("{lib}/**/*")   
   s.rdoc_options     = ["--charset=UTF-8"]
