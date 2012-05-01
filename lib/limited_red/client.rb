@@ -25,11 +25,11 @@ module LimitedRed
                          :version => LimitedRed::Version::STRING,
                          :token => token_for(data.merge(:build_id => build_id))})
 
-      #@thread_pool.with_a_thread_run do
+      @thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
         p response
         log(response) if error?(response)
-        #end
+      end
     end
 
     def log_build(build_id, data)
@@ -38,10 +38,10 @@ module LimitedRed
                          :version => LimitedRed::Version::STRING,
                          :build_id => build_id, :token => token_for(data)})
         
-      #@thread_pool.with_a_thread_run do
+      @thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds", :body => data)
         log(response) if response && error?(response)
-        #end
+      end
     end
       
     def find_failing_features
