@@ -1,5 +1,5 @@
 module LimitedRed # :nodoc:
   module Version # :nodoc:
-    STRING = '0.3.11'
+    STRING = '0.3.12'
   end
 end
