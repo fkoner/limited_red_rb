@@ -27,7 +27,6 @@ module LimitedRed
 
       @thread_pool.with_a_thread_run do
         response = @adapter.post("/projects/#{@project_id}/builds/#{build_id}/results", :body => data)
-        p response
         log(response) if error?(response)
       end
     end
