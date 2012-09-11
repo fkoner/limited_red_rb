@@ -45,7 +45,7 @@ module LimitedRed
         config.load_and_validate_config('cucumber')
       end
     end
-    
+
     context "Running limited red after having setup config files" do
       include FakeFS::SpecHelpers
 
@@ -77,6 +77,38 @@ EOS
                           'port' => 9292,
                           'username' => 'josephwilk',
                           'api key' => 123,
+                          'project name' => 'cuke_internal_tests',
+                          'type' => 'cucumber'}
+      end
+      
+    end
+    
+    context "Runnig limited red with env based config" do
+      include FakeFS::SpecHelpers
+
+      before(:each) do
+        Dir.stub!(:glob).with("/home/josephwilk/.limited_red").and_return([])
+        Dir.stub!(:glob).with('.limited_red').and_return(['.limited_red'])
+        
+        @project_config = <<-EOS
+project name: cuke_internal_tests
+EOS
+      end
+
+      let(:env){
+        {'LIMITED_RED_API_KEY' => '123',
+         'LIMITED_RED_USERNAME' => 'josephwilk'}
+        }
+      
+      it "should use the env based config" do
+        config = Config.new(fake_stdout, fake_stdin, env)
+        
+        IO.stub!(:read).with('.limited_red').and_return(@project_config)
+
+        config = config.load_and_validate_config('cucumber')
+
+        config.should == {'username' => 'josephwilk',
+                          'api key' => '123',
                           'project name' => 'cuke_internal_tests',
                           'type' => 'cucumber'}
       end

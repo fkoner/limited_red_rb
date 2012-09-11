@@ -1,8 +1,9 @@
 module LimitedRed
   class Config
-    def initialize(out_stream = STDOUT, in_stream = STDIN)
+    def initialize(out_stream = STDOUT, in_stream = STDIN, env_config = ENV)
       @in = in_stream
       @out = out_stream
+      @env_config = env_config
     end
     
     def self.load_and_validate_config(type)
@@ -26,7 +27,17 @@ module LimitedRed
       @config ||= begin
         limited_red_project_config  = load_yaml(limited_red_project_config_file)
         limited_red_shared_config = load_yaml(limited_red_shared_config_file)
-        limited_red_shared_config.merge(limited_red_project_config)
+
+        limited_red_shared_config = limited_red_shared_config.merge(limited_red_project_config)
+
+        if @env_config.has_key?('LIMITED_RED_USERNAME')
+          limited_red_shared_config = limited_red_shared_config.merge({'username' => @env_config['LIMITED_RED_USERNAME']})
+        end
+
+        if @env_config.has_key?('LIMITED_RED_API_KEY')
+          limited_red_shared_config = limited_red_shared_config.merge({'api key' => @env_config['LIMITED_RED_API_KEY']})
+        end
+        limited_red_shared_config
       end
     end
 
@@ -42,6 +53,8 @@ module LimitedRed
     end
 
     def ensure_config_exists
+      return if @env_config['LIMITED_RED_API_KEY']
+
       unless limited_red_project_config_file_exists?
         details = ask_for_setup_details
 
