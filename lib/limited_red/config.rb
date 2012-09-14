@@ -25,6 +25,7 @@ module LimitedRed
 
     def config
       @config ||= begin
+        puts @env_config.inspect
         limited_red_project_config  = load_yaml(limited_red_project_config_file)
         limited_red_shared_config = load_yaml(limited_red_shared_config_file)
 
@@ -37,6 +38,8 @@ module LimitedRed
         if @env_config.has_key?('LIMITED_RED_API_KEY')
           limited_red_shared_config = limited_red_shared_config.merge({'api key' => @env_config['LIMITED_RED_API_KEY']})
         end
+        puts limited_red_shared_config.inspect
+        
         limited_red_shared_config
       end
     end
