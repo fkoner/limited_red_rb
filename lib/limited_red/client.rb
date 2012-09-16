@@ -3,9 +3,9 @@ module LimitedRed
     def initialize(config, out = STDOUT, adapter = nil, thread_pool = ThreadPool)
       @config ||= config
       @out = out
-      @project_id = @config['project name']
       @username = @config['username']
       @api_key = @config['api key']
+      @project_id = "#{@username}/#{@config['project name']}"
         
       @adapter = adapter || LimitedRed::Adapter::HttParty.new(@config)
       @thread_pool = thread_pool
@@ -26,7 +26,7 @@ module LimitedRed
                          :token => token_for(data.merge(:build_id => build_id))})
 
       @thread_pool.with_a_thread_run do
-        response = @adapter.post("/#{@project_id}/builds/#{build_id}/results", :body => data)
+        response = @adapter.post("/{@project_id}/builds/#{build_id}/results", :body => data)
         log(response) if error?(response)
       end
     end
