@@ -26,7 +26,7 @@ module LimitedRed
                          :token => token_for(data.merge(:build_id => build_id))})
 
       @thread_pool.with_a_thread_run do
-        response = @adapter.post("/#{@username}/#{@project_id}/builds/#{build_id}/results", :body => data)
+        response = @adapter.post("/#{@project_id}/builds/#{build_id}/results", :body => data)
         log(response) if error?(response)
       end
     end
@@ -38,7 +38,7 @@ module LimitedRed
                          :build_id => build_id, :token => token_for(data)})
         
       @thread_pool.with_a_thread_run do
-        response = @adapter.post("/#{@username}/#{@project_id}/builds", :body => data)
+        response = @adapter.post("/#{@project_id}/builds", :body => data)
         log(response) if response && error?(response)
       end
     end
@@ -47,7 +47,7 @@ module LimitedRed
       raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
 
       begin
-        response = @adapter.get("/#{@username}/#{@project_id}/features/fails?user=#{@username}")
+        response = @adapter.get("/#{@project_id}/features/fails?user=#{@username}")
       rescue
         puts "[Limited Red] Unable to reach www.limited-red.com. No tests will be recorded."
         return []
