@@ -1,5 +1,5 @@
 AfterConfiguration do |config|
-  unless ENV['STOP_RECORDING']
+  if ENV['LIMITED_RED']
     require 'limited_red'
   
     limited_red_config = LimitedRed::Config.load_and_validate_config('cucumber')

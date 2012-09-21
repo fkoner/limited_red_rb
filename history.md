@@ -1,3 +1,6 @@
+#0.4.4
+* By default Limited red is off unless ENV['LIMITED_RED'] is set
+
 #0.3.10
 * Experimental support for Rspec added (Joseph Wilk)
 
