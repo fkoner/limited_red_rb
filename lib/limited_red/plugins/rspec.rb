@@ -1,7 +1,7 @@
 require 'limited_red'
 
 RSpec.configure do |config|
-  if ENV['LIMITED_RED']
+  if ENV['LIMITED_RED'] || ENV['LIMITED_RED_API_KEY']
     CLIENT = LimitedRed::Client.new(LimitedRed::Config.load_and_validate_config('rspec'))
     BUILD_ID = Time.now.to_i
 

@@ -1,5 +1,5 @@
 AfterConfiguration do |config|
-  if ENV['LIMITED_RED']
+  if ENV['LIMITED_RED'] || ENV['LIMITED_RED_API_KEY']
     require 'limited_red'
   
     limited_red_config = LimitedRed::Config.load_and_validate_config('cucumber')
