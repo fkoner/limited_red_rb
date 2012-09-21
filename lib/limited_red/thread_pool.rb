@@ -20,7 +20,7 @@ module LimitedRed
       end
       
       def wait_for_all_threads_to_finish
-        @threads.each do |thread|
+        (@threads||[]).each do |thread|
           begin
             thread.join
           rescue
