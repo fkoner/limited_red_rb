@@ -40,5 +40,8 @@ RSpec.configure do |config|
       FakeWeb.allow_net_connect = false if defined?(FakeWeb)
     end
   end
-  
 end
+
+at_exit{
+  LimitedRed::ThreadPool.wait_for_all_threads_to_finish
+}
