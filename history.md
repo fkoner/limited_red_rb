@@ -1,3 +1,6 @@
+#0.4.6
+* at_exit hook within Rspec plugin should handle case where there are no threads to fire
+
 #0.4.4
 * By default Limited red is off unless ENV['LIMITED_RED'] is set
 
