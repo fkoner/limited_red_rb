@@ -16,9 +16,7 @@ RSpec.configure do |config|
 
         metadata.add_exception(example.exception)
   
-        without_fakeweb do
-          CLIENT.log_fail_result(BUILD_ID,  :uri => metadata.uri, :result => metadata.to_json)
-        end
+        CLIENT.log_fail_result(BUILD_ID,  :uri => metadata.uri, :result => metadata.to_json)
       else # Pass
         passes << metadata.file_and_line
         CLIENT.log_pass_result(BUILD_ID, :uri => metadata.uri, :result => metadata.to_json)
