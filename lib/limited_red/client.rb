@@ -28,8 +28,8 @@ module LimitedRed
       @thread_pool.with_a_thread_run do
         without_fakeweb do
           response = @adapter.post("/#{@project_id}/builds/#{build_id}/results", :body => data)
+          log(response) if error?(response)
         end
-        log(response) if error?(response)
       end
     end
 
@@ -42,8 +42,8 @@ module LimitedRed
       @thread_pool.with_a_thread_run do
         without_fakeweb do
           response = @adapter.post("/#{@project_id}/builds", :body => data)
+          log(response) if response && error?(response)
         end
-        log(response) if response && error?(response)
       end
     end
       
@@ -51,7 +51,10 @@ module LimitedRed
       raise "No project name was found in params: #{@config.inspect}" if @project_id.nil?
 
       begin
-        response = @adapter.get("/#{@project_id}/features/fails")
+        response = nil
+        without_fakeweb do
+          response = @adapter.get("/#{@project_id}/features/fails")
+        end
       rescue
         puts "[Limited Red] Unable to reach www.limited-red.com. No tests will be recorded."
         return []
