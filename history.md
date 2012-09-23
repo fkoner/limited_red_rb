@@ -1,3 +1,6 @@
+#0.4.7
+* Minor fix with the Rspec plugin not hanlding fakeweb being activated
+
 #0.4.6
 * at_exit hook within Rspec plugin should handle case where there are no threads to fire
 
