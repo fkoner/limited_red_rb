@@ -11,3 +11,5 @@ branches:
 notifications:
   email:
     - joe@josephwilk.net
+
+services: mongodb
