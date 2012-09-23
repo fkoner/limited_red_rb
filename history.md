@@ -1,3 +1,6 @@
+#0.4.8
+* Uploading failes via rspec fixed
+
 #0.4.7
 * Minor fix with the Rspec plugin not hanlding fakeweb being activated
 
