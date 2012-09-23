@@ -20,9 +20,7 @@ module LimitedRed
           if supports_feature_hash?
             json = feature_hash.to_json
             
-            without_fakeweb do
-              @client.log_result(@build_id, :result => json, :uri => feature_hash['uri'])
-            end
+            @client.log_result(@build_id, :result => json, :uri => feature_hash['uri'])
           else
             puts "[limited_red]:Error: Having trouble working with your Gherkin version. Is it upto date? Report this to joe@josephwilk.net, its his fault.", ""
           end
@@ -33,10 +31,8 @@ module LimitedRed
         end
 
         def print_summary
-          without_fakeweb do
-           @client.log_build(@build_id, {:fails => failing_files, 
+          @client.log_build(@build_id, {:fails => failing_files, 
                                          :passes => passing_files})
-          end
                                                    
           ThreadPool.wait_for_all_threads_to_finish
         end
@@ -65,12 +61,6 @@ module LimitedRed
           @gf
         end
         
-        def without_fakeweb
-          FakeWeb.allow_net_connect = true if defined?(FakeWeb)
-          yield
-          FakeWeb.allow_net_connect = false if defined?(FakeWeb)
-        end
-      
       end
     end
   end
