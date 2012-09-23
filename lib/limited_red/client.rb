@@ -26,7 +26,9 @@ module LimitedRed
                          :token => token_for(data.merge(:build_id => build_id))})
 
       @thread_pool.with_a_thread_run do
-        response = @adapter.post("/#{@project_id}/builds/#{build_id}/results", :body => data)
+        without_fakeweb do
+          response = @adapter.post("/#{@project_id}/builds/#{build_id}/results", :body => data)
+        end
         log(response) if error?(response)
       end
     end
@@ -38,7 +40,9 @@ module LimitedRed
                          :build_id => build_id, :token => token_for(data)})
         
       @thread_pool.with_a_thread_run do
-        response = @adapter.post("/#{@project_id}/builds", :body => data)
+        without_fakeweb do
+          response = @adapter.post("/#{@project_id}/builds", :body => data)
+        end
         log(response) if response && error?(response)
       end
     end
@@ -101,5 +105,12 @@ module LimitedRed
     def error_message(response)
       "\nLimited Red had a problem logging your test results: #{response ? response.body : ''}"
     end
+    
+    def without_fakeweb
+      FakeWeb.allow_net_connect = true if defined?(FakeWeb)
+      yield
+      FakeWeb.allow_net_connect = false if defined?(FakeWeb)
+    end
+    
   end
 end

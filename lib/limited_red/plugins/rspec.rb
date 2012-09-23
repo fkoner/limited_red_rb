@@ -21,24 +21,15 @@ RSpec.configure do |config|
         end
       else # Pass
         passes << metadata.file_and_line
-        without_fakeweb do
-          CLIENT.log_pass_result(BUILD_ID, :uri => metadata.uri, :result => metadata.to_json)
-        end
+        CLIENT.log_pass_result(BUILD_ID, :uri => metadata.uri, :result => metadata.to_json)
       end
     end
   
     config.after(:suite) do
-      without_fakeweb do
-        CLIENT.log_build(BUILD_ID, {:fails => fails,
-                                    :passes => passes})
-      end
+      CLIENT.log_build(BUILD_ID, {:fails => fails,
+                                  :passes => passes})
     end
-  
-    def without_fakeweb
-      FakeWeb.allow_net_connect = true if defined?(FakeWeb)
-      yield
-      FakeWeb.allow_net_connect = false if defined?(FakeWeb)
-    end
+
   end
 end
 
