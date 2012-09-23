@@ -22,7 +22,7 @@ module LimitedRed::Cucumber::Formatter
     end
     
     describe "#after_feature" do
-      let(:fake_feature){mock("fake_feature", :to_json => "{'FEATURE JSON'}")}
+      let(:fake_feature){mock("fake_feature", :to_json => "{'FEATURE JSON'}", :[] => nil)}
 
       class FakeGherkinFormatter
         def initialize(json)
@@ -53,7 +53,7 @@ module LimitedRed::Cucumber::Formatter
         #TODO: How does this get set by Cucumber/Gherkin?
         stats.instance_variable_set("@gf", FakeGherkinFormatter.new(fake_feature))
         
-        client.should_receive(:log_result).with(anything, {:result => "{'FEATURE JSON'}"} )
+        client.should_receive(:log_result).with(anything, {:result => "{'FEATURE JSON'}", :uri=>nil} )
         
         stats.after_feature(mock("feature result"))
       end

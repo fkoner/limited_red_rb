@@ -33,13 +33,14 @@ module LimitedRed
       it "should post the build data" do
         client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
                 
-        fake_http_adapter.should_receive(:post).with("/projects/blah/builds/123/results", {:body=> {:user=>"josephwilk", 
+        fake_http_adapter.should_receive(:post).with("/josephwilk/blah/builds/123/results", {:body=> {
                                                                                                     :fails=>"", 
                                                                                                     :passes=>"", 
                                                                                                     :result=>"", 
-                                                                                                    :build_id=>123, 
+                                                                                                    :build_id=>123,
+                                                                                                    :user=>"josephwilk", 
                                                                                                     :version => '6.6.6',
-                                                                                                    :token => "24877e67c60f45ba7330f1113a782118e7dafab9e9684bcba68e88528c05398e7d28498783bb2727ed62bb9e49863e6b6581341cc527923ecc533eed5c55d517"}})
+                                                                                                    :token => "cb07c5c711c99e340766f8984f8342c973663a863182c5e0b804964f1b8dc84a15cd05e3f66aac0cbabff9690aff0ce2c92f615679ac81bb515dfdbb375b3948"}})
         
         build_data = {:fails => "",
                       :passes => "",
@@ -54,18 +55,12 @@ module LimitedRed
       it "should post the build data" do
         client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
         
-        fake_http_adapter.should_receive(:post).with("/projects/blah/builds", {:body=> {:user=>"josephwilk", 
-                                                                                        :passes=>"", 
-                                                                                        :fails=>"",
-                                                                                        :result=>"", 
-                                                                                        :build_id=>123, 
-                                                                                        :version => '6.6.6',
-                                                                                        :token=>"24877e67c60f45ba7330f1113a782118e7dafab9e9684bcba68e88528c05398e7d28498783bb2727ed62bb9e49863e6b6581341cc527923ecc533eed5c55d517"}})
-                
+        fake_http_adapter.should_receive(:post).with("/josephwilk/blah/builds", {:body=>{:fails=>"", :passes=>"", :result=>"", :build_id=>123, :user=>"josephwilk", :version=>"6.6.6", 
+                                                                                         :token=> "cb07c5c711c99e340766f8984f8342c973663a863182c5e0b804964f1b8dc84a15cd05e3f66aac0cbabff9690aff0ce2c92f615679ac81bb515dfdbb375b3948"}})    
         build_data = {:fails => "",
-                      :passes => "",
-                      :result => "",
-                      :build_id => 123}
+                     :passes => "",
+                     :result => "",
+                     :build_id => 123}
         
         client.log_build(build_id = 123, build_data)
       end
@@ -75,7 +70,7 @@ module LimitedRed
       it "should make a request for the failing features" do
         client = Client.new(test_config, fake_stdout, fake_http_adapter, FakeThreadPool)
         
-        fake_http_adapter.should_receive(:get).with("/projects/blah/features/fails?user=josephwilk")
+        fake_http_adapter.should_receive(:get).with("/josephwilk/blah/features/fails")
                 
         client.find_failing_features
       end
