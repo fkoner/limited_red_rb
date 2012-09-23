@@ -43,11 +43,11 @@ Given /^I have environment variable (\w+) set to "([^\"]*)"$/ do |variable, valu
 end
 
 When /^I (?:have )?run rake (.*)$/ do |rake_opts|
-  run "rake #{rake_opts} --trace"
+  run "LIMITED_RED=on rake #{rake_opts} --trace"
 end
 
 When /^I run cucumber (.*)$/ do |cucumber_opts|
-  run "#{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
+  run "LIMITED_RED=on #{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
 end
 
 Then /^it should (fail|pass)$/ do |success|
