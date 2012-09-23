@@ -19,6 +19,6 @@ Feature: Rspec
   Scenario: Frequent failing feature
     Given a spec named "spec/fickle_spec.rb" which always fails
     And a spec named "spec/awesome_spec.rb" which always passes
-    And I have run "rspec spec"
-    When I run "rspec spec"
+    And I have run "LIMITED_RED=on rspec spec"
+    When I run "LIMITED_RED=on rspec spec"
     Then "spec/fickle_spec.rb" should be run first

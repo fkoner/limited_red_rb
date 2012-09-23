@@ -27,7 +27,7 @@ EOF
   step %Q{a file named "#{dir}/features/step_definitions/steps.rb" with:}, steps 
 end
 
-When /^I run "cucumber ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
+When /^I run "LIMITED_RED=on cucumber ([^\"]*)"(?: in "([^\"]*)")?$/ do |cucumber_opts, build|
   @current_dir = working_dir + "/" + (build ? build : "")
   in_current_dir do
     run "#{CUCUMBER_EXECUTABLE} #{cucumber_opts}"

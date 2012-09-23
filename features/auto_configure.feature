@@ -10,5 +10,5 @@ Feature: Auto Configure
       $LOAD_PATH.unshift(CUCUMBER_LIB)
       require 'limited_red/plugins/cucumber'
     """
-    When I run "cucumber features" in "build"
+    When I run "LIMITED_RED=on cucumber features" in "build"
     Then "features/fickle.feature" should be run first

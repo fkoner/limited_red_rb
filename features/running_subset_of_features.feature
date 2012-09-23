@@ -22,7 +22,7 @@ Feature: Running subset of features
   Scenario: Running single feature
     Given a feature named "features/fickle.feature" which always fails
     And a feature named "features/awesome.feature" which always passes
-    And I have run "cucumber features"
-    When I run "cucumber features/awesome.feature"
+    And I have run "LIMITED_RED=on cucumber features"
+    When I run "LIMITED_RED=on cucumber features/awesome.feature"
     Then "features/fickle.feature" should not be run
     And "features/awesome.feature" should be run

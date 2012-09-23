@@ -22,24 +22,24 @@ Feature: Run features prioritising the most likely to fail
   Scenario: Frequent failing feature
     Given a feature named "features/fickle.feature" which always fails
     And a feature named "features/awesome.feature" which always passes
-    And I have run "cucumber features"
-    When I run "cucumber features"
+    And I have run "LIMITED_RED=on cucumber features"
+    When I run "LIMITED_RED=on cucumber features"
     Then "features/fickle.feature" should be run first
 
   Scenario: Previous fail takes precedent over older fail
     Given a feature named "features/a.feature" which fails
     And a feature named "features/b.feature" which passes
-    And I have run "cucumber features"
+    And I have run "LIMITED_RED=on cucumber features"
     And the feature "features/a.feature" is fixed
     And the feature "features/b.feature" is broken
-    And I have run "cucumber features"
-    When I run "cucumber features"
+    And I have run "LIMITED_RED=on cucumber features"
+    When I run "LIMITED_RED=on cucumber features"
     Then "features/b.feature" should be run first
         
   Scenario: Failure which has been deleted
     Given a feature named "features/a.feature" which fails
-    And I have run "cucumber features"
+    And I have run "LIMITED_RED=on cucumber features"
     And the feature "features/a.feature" is deleted
-    When I run "cucumber features"
+    When I run "LIMITED_RED=on cucumber features"
     Then "features/a.feature" should not be run
     

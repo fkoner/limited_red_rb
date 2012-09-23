@@ -47,8 +47,13 @@ When /^I (?:have )?run rake (.*)$/ do |rake_opts|
 end
 
 When /^I run cucumber (.*)$/ do |cucumber_opts|
-  run "LIMITED_RED=on #{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
+  run "#{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
 end
+
+When /^I run "cucumber features"$/ do |arg1|
+  run "#{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
+end
+
 
 Then /^it should (fail|pass)$/ do |success|
   if success == 'fail'

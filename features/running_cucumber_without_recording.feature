@@ -22,6 +22,6 @@ Feature: Running cucumber without recording
   Scenario: Turning off
     Given a feature named "features/fickle.feature" which always fails
     And a feature named "features/awesome.feature" which always passes
-    And I have run "STOP_RECORDING=1 cucumber features"
+    And I have run "cucumber features"
     When I run "cucumber features"
     Then "features/awesome.feature" should be run first

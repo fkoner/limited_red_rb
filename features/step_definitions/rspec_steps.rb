@@ -34,10 +34,10 @@ EOS
   create_file(filename, file_content)
 end
 
-Given /^I have run "rspec ([^"]*)"$/ do |specs|
-  run "rspec #{specs}"
+Given /^I have run "(.*)rspec ([^"]*)"$/ do |pre_options, specs|
+  run "#{pre_options} rspec #{specs}"
 end
 
-When /^I run "rspec ([^"]*)"$/ do |specs|
-  run "rspec #{specs}"
+When /^I run (.*) rspec ([^"]*)"$/ do |pre_options, specs|
+  run "#{pre_options} rspec #{specs}"
 end
