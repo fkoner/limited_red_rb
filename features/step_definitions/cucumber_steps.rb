@@ -51,7 +51,7 @@ When /^I run cucumber (.*)$/ do |cucumber_opts|
 end
 
 When /^I run "cucumber features"$/ do
-  run "#{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color #{cucumber_opts} CUCUMBER_OUTPUT_ENCODING=UTF-8"
+  run "#{Cucumber::RUBY_BINARY} -r rubygems #{Cucumber::BINARY} --no-color features CUCUMBER_OUTPUT_ENCODING=UTF-8"
 end
 
 
